@@ -13,6 +13,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 )
 
@@ -22,16 +23,15 @@ type SubmissionResult struct {
 	Output       string
 }
 type SubmissionMessage struct {
-	SubmissionId string
-	ProblemId    string
-	TimeLimit    time.Time
+	SubmissionId   string
+	ProblemId      string
+	TestCaseNumber int
+	TimeLimit      time.Duration
 }
 
 const TestCaseNumber = 3
 
 func main() {
-
-	//cleanCh := make(chan *os.File, 30)
 
 	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
 
@@ -76,16 +76,13 @@ func main() {
 		}
 		msg := msg
 		go func() {
-			outputs, err := Run(submission)
+			outputs, cli, resp, err := Run(submission)
 			if err != nil {
 				log.Fatalf("%s: %s", "Failed to marshal output", err)
 			}
+			outputs = checkTestCases(cli, resp.ID, outputs, submission)
 			fmt.Println(outputs)
-			//outputs = checkTestCases(outputs, submission, cleanCh)
-			//fmt.Println(outputs)
-			//cleanUp(cleanCh)
 			msg.Ack(true)
-
 		}()
 
 	}
@@ -94,7 +91,7 @@ func main() {
 
 }
 
-func Run(submission SubmissionMessage) (map[string]string, error) {
+func Run(submission SubmissionMessage) (map[string]string, *client.Client, container.CreateResponse, error) {
 
 	Outputs := make(map[string]string)
 
@@ -120,58 +117,97 @@ func Run(submission SubmissionMessage) (map[string]string, error) {
 	}
 	dest := "/home"
 	ProblemSRC := fmt.Sprintf("Problems/Problem%s/in", submission.ProblemId)
-	SubmissionSRC := fmt.Sprintf("Submissions/%s.py", submission.SubmissionId)
+	SubmissionSRC := fmt.Sprintf("Submissions/%s/%s.py", submission.SubmissionId, submission.SubmissionId)
 	err = copyDirToContainer(ctx, ProblemSRC, dest, cli, resp.ID)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("%s: %s", "Failed to copy problem to container", err)
 
 	}
 	err = copyDirToContainer(ctx, SubmissionSRC, dest, cli, resp.ID)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("%s: %s", "Failed to copy submission to container", err)
 	}
 
 	for i := 0; i < TestCaseNumber; i++ {
-		output, err := createExec(ctx, cli, resp.ID, fmt.Sprintf("python3 %s.py < in%d.txt", submission.SubmissionId, i+1))
+		newCTX := context.WithValue(ctx, "TestCase", i+1)
+		output, err := createExec(newCTX, cli, resp.ID, fmt.Sprintf("python3 %s.py < in%d.txt > out%d.txt 2>out%d.txt ; echo done", submission.SubmissionId, i+1, i+1, i+1), submission)
 		if err != nil {
-			return nil, err
+			return nil, cli, resp, err
 		}
 		Outputs[fmt.Sprintf("TestCase%d", i+1)] = output
 	}
 
 	err = cli.ContainerKill(ctx, resp.ID, "SIGKILL")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("%s: %s", "Failed to kill container", err)
 	}
 
-	return Outputs, nil
+	return Outputs, cli, resp, nil
 }
 
-func createExec(ctx context.Context, cli *client.Client, containerID, command string) (string, error) {
+func createExec(ctx context.Context, cli *client.Client, containerID, command string, submission SubmissionMessage) (string, error) {
 	execConfig := types.ExecConfig{
 		AttachStdout: true,
 		AttachStderr: true,
 		Cmd:          []string{"sh", "-c", command},
 		WorkingDir:   "/home",
 	}
+
 	execResp, err := cli.ContainerExecCreate(ctx, containerID, execConfig)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("%s: %s", "Failed to create exec", err)
+	}
+	cancelCtx, cancel := context.WithTimeout(ctx, submission.TimeLimit)
+	defer cancel()
+
+	outCH := make(chan []byte)
+	go func() {
+		execStartResp, err := cli.ContainerExecAttach(cancelCtx, execResp.ID, types.ExecStartCheck{})
+		if err != nil {
+			log.Fatalf("%s: %s", "Failed to attach exec", err)
+		}
+		output := make([]byte, 4096)
+		_, err = execStartResp.Reader.Read(output)
+		if err != nil && err != io.EOF {
+			log.Fatalf("%s: %s", "Failed to read from exec", err)
+		}
+		outCH <- output
+		execStartResp.Close()
+	}()
+
+	select {
+	case <-cancelCtx.Done():
+		return "Time Limit Exceeded", nil
+	case output1 := <-outCH:
+		return string(output1), nil
 	}
 
-	execStartResp, err := cli.ContainerExecAttach(ctx, execResp.ID, types.ExecStartCheck{})
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer execStartResp.Close()
+}
 
-	output := make([]byte, 4096)
-	_, err = execStartResp.Reader.Read(output)
-	if err != nil {
-		log.Fatal(err)
+func checkTestCases(cli *client.Client, containerID string, output map[string]string, submission SubmissionMessage) map[string]string {
+	outputs := make(map[string]string)
+	ctx := context.Background()
+
+	for i := 0; i < TestCaseNumber; i++ {
+		if output[fmt.Sprintf("TestCase%d", i+1)] == "Time Limit Exceeded" {
+			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Time Limit Exceeded"
+			continue
+		}
+		src := fmt.Sprintf("/home/out%d.txt", i+1)
+		fromContainer, _, _ := cli.CopyFromContainer(ctx, containerID, src)
+
+		TarToTxt(fromContainer, submission.SubmissionId)
+
+		if checkRunTime(fmt.Sprintf("Submissions/%s/out%d.txt", submission.SubmissionId, i+1)) {
+			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Runtime Error"
+			continue
+		}
+
+		outputs[fmt.Sprintf("TestCase%d", i+1)] = CompareOutputs(fmt.Sprintf("Problems/Problem%s/out/%d.txt", submission.ProblemId, i+1), fmt.Sprintf("Submissions/%s/out%d.txt", submission.SubmissionId, i+1))
+
 	}
-	return string(output), nil
+	return outputs
 }
 
 func copyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client.Client, id string) error {
@@ -237,18 +273,13 @@ func copyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client
 
 		return nil
 	})
-
 	if err != nil {
 		return err
 	}
-
-	// Close the tar writer
 	err = tw.Close()
 	if err != nil {
 		return err
 	}
-
-	// Open the created archive file for reading
 	archiveFile, err = os.Open(archivePath)
 	if err != nil {
 		return err
@@ -260,7 +291,6 @@ func copyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client
 		}
 	}(archiveFile)
 
-	// Copy the archive to the container
 	err = cli.CopyToContainer(ctx, id, destDir, archiveFile, types.CopyToContainerOptions{})
 	if err != nil {
 		return err
@@ -269,42 +299,92 @@ func copyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client
 	return nil
 }
 
-//func checkTestCases(output map[string]string, submission SubmissionMessage, cleanCh chan *os.File) map[string]string {
-//	src := fmt.Sprintf("Problems/Problem%s/out", submission.ProblemId)
-//	outputs := make(map[string]string)
-//
-//	fmt.Println(output)
-//
-//	for i := 0; i < TestCaseNumber; i++ {
-//		file, err := os.Open(fmt.Sprintf("%s/%d.txt", src, i+1))
-//		if err != nil {
-//			log.Fatal(err)
-//		}
-//		cleanCh <- file
-//		out := make([]byte, 4096)
-//		_, err = file.Read(out)
-//		if err != nil {
-//			return nil
-//		}
-//		if strings.EqualFold(string(out), output[fmt.Sprintf("TestCase%d", i+1)]) {
-//			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Wrong Answer"
-//		} else {
-//			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Accepted"
-//		}
-//	}
-//	cleanCh <- nil
-//	return outputs
-//}
-//
-//func cleanUp(cleanCh <-chan *os.File) {
-//	for file := range cleanCh {
-//		if file == nil {
-//			break
-//		}
-//		err := file.Close()
-//		if err != nil {
-//			log.Fatal(err)
-//		}
-//	}
-//
-//}
+func TarToTxt(reader io.ReadCloser, ID string) {
+	read := tar.NewReader(reader)
+	for {
+		header, err := read.Next()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			fmt.Println(err)
+		}
+		if header.Typeflag == tar.TypeReg {
+			file, err := os.Create("/home/b4rd14/go/judge/Submissions/" + ID + "/" + header.Name)
+			if err != nil {
+				fmt.Println(err)
+			}
+			_, err = io.Copy(file, read)
+			if err != nil {
+				fmt.Println(err)
+			}
+			err = file.Close()
+			if err != nil {
+				fmt.Println(err)
+			}
+
+		}
+	}
+}
+
+func checkRunTime(filename string) bool {
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Fatalf("%s: %s", "Failed to open file", err)
+	}
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+
+		}
+	}(file)
+
+	out := make([]byte, 4096)
+	_, err = file.Read(out)
+	if err != nil {
+		log.Fatalf("%s: %s", "Failed to read from file", err)
+	}
+	if strings.Contains(string(out), "Traceback (most recent call last):") {
+		return true
+	}
+	return false
+}
+
+func CompareOutputs(output1 string, output2 string) string {
+	out1, err := os.Open(output1)
+	if err != nil {
+		log.Fatalf("%s: %s", "Failed to open file", err)
+	}
+	defer func(out1 *os.File) {
+		err := out1.Close()
+		if err != nil {
+
+		}
+	}(out1)
+
+	out2, err := os.Open(output2)
+	if err != nil {
+		log.Fatalf("%s: %s", "Failed to open file", err)
+	}
+	defer func(out2 *os.File) {
+		err := out2.Close()
+		if err != nil {
+
+		}
+	}(out2)
+
+	out1Bytes, err := io.ReadAll(out1)
+	if err != nil {
+		log.Fatalf("%s: %s", "Failed to read from file", err)
+	}
+
+	out2Bytes, err := io.ReadAll(out2)
+	if err != nil {
+		log.Fatalf("%s: %s", "Failed to read from file", err)
+	}
+	if strings.TrimSpace(string(out1Bytes)) == strings.TrimSpace(string(out2Bytes)) {
+		return "Accepted"
+	} else {
+		return "Wrong Answer"
+	}
+}

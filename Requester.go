@@ -12,7 +12,7 @@ import (
 type SubmissionMessage struct {
 	SubmissionId string
 	ProblemId    string
-	TimeLimit    time.Time
+	TimeLimit    time.Duration
 }
 
 func main() {
@@ -62,8 +62,9 @@ func main() {
 	defer cancel()
 
 	submission := SubmissionMessage{
-		SubmissionId: "2",
+		SubmissionId: "1",
 		ProblemId:    "1",
+		TimeLimit:    2 * time.Second,
 	}
 	submissionBytes, err := json.Marshal(submission)
 	if err != nil {
