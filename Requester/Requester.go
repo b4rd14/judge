@@ -14,6 +14,7 @@ type SubmissionMessage struct {
 	ProblemID      string
 	TestCaseNumber int
 	TimeLimit      time.Duration
+	MemoryLimit    int64
 }
 
 func Request() {

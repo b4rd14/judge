@@ -23,6 +23,7 @@ type SubmissionMessage struct {
 	ProblemID      string
 	TestCaseNumber int
 	TimeLimit      time.Duration
+	MemoryLimit    int64
 }
 
 func NewClient() (*client.Client, error) {
@@ -172,11 +173,25 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 		execStartResp.Close()
 	}()
 
-	select {
-	case <-cancelCtx.Done():
-		return "Time Limit Exceeded", nil
-	case output1 := <-outCH:
-		return string(output1), nil
+	for {
+		stats, err := cli.ContainerStats(ctx, containerID, false)
+		if err != nil {
+			log.Fatalf("%s: %s", "Failed to get container stats", err)
+		}
+		var memStats types.MemoryStats
+		err = json.NewDecoder(stats.Body).Decode(&memStats)
+		if err != nil {
+			log.Fatalf("%s: %s", "Failed to decode memory stats", err)
+		}
+		if memStats.Usage > uint64(submission.MemoryLimit) {
+			return "Memory Limit Exceeded", nil
+		}
+		select {
+		case <-cancelCtx.Done():
+			return "Time Limit Exceeded", nil
+		case output1 := <-outCH:
+			return string(output1), nil
+		}
 	}
 
 }
