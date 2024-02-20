@@ -172,12 +172,10 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 		KillContainer(cli, ctx, containerID)
 		log.Fatalf("%s: %s", "Failed to create exec", err)
 	}
-	cancelCtx, cancel := context.WithTimeout(ctx, submission.TimeLimit)
-	defer cancel()
 
 	outCH := make(chan []byte)
 	go func() {
-		execStartResp, err := cli.ContainerExecAttach(cancelCtx, execResp.ID, types.ExecStartCheck{})
+		execStartResp, err := cli.ContainerExecAttach(ctx, execResp.ID, types.ExecStartCheck{})
 		if err != nil {
 			KillContainer(cli, ctx, containerID)
 			log.Fatalf("%s: %s", "Failed to attach exec", err)
@@ -192,21 +190,26 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 		execStartResp.Close()
 	}()
 
+	memCh := make(chan struct{})
 	for {
-		stats, err := cli.ContainerStats(ctx, containerID, false)
-		if err != nil {
-			log.Fatalf("%s: %s", "Failed to get container stats", err)
-		}
-		var memStats types.MemoryStats
-		err = json.NewDecoder(stats.Body).Decode(&memStats)
-		if err != nil {
-			log.Fatalf("%s: %s", "Failed to decode memory stats", err)
-		}
-		if memStats.Usage > uint64(submission.MemoryLimit) {
-			return "Memory Limit Exceeded", nil
-		}
+		go func() {
+			stats, err := cli.ContainerStats(ctx, containerID, false)
+			if err != nil {
+				log.Fatalf("%s: %s", "Failed to get container stats", err)
+			}
+			var memStats types.MemoryStats
+			err = json.NewDecoder(stats.Body).Decode(&memStats)
+			if err != nil {
+				log.Fatalf("%s: %s", "Failed to decode memory stats", err)
+			}
+			if memStats.Usage > uint64(submission.MemoryLimit) {
+				memCh <- struct{}{}
+			}
+		}()
 		select {
-		case <-cancelCtx.Done():
+		case <-memCh:
+			return "Memory Limit Exceeded", nil
+		case <-time.After(submission.TimeLimit + 50*time.Millisecond):
 			return "Time Limit Exceeded", nil
 		case output1 := <-outCH:
 			return string(output1), nil

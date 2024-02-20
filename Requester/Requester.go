@@ -67,7 +67,7 @@ func Request() {
 	submission := SubmissionMessage{
 		SubmissionID:   "1",
 		ProblemID:      "1",
-		TimeLimit:      2500 * time.Millisecond,
+		TimeLimit:      1100 * time.Millisecond,
 		Type:           "python",
 		TestCaseNumber: 10,
 	}

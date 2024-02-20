@@ -45,18 +45,15 @@ func ListBuckets(client *minio.Client) ([]minio.BucketInfo, error) {
 }
 
 func Download(ctx context.Context, client *minio.Client, bucketName string, Prefix string, dirName string) error {
-	objectCh := client.ListObjects(ctx, bucketName, minio.ListObjectsOptions{
+	select {
+	case object := <-client.ListObjects(ctx, bucketName, minio.ListObjectsOptions{
 		Prefix:    Prefix,
 		Recursive: true,
-	})
-	for object := range objectCh {
-		if object.Err != nil {
-			return object.Err
-		}
+	}):
 		err := client.FGetObject(ctx, bucketName, object.Key, dirName+"/"+object.Key, minio.GetObjectOptions{})
 		if err != nil {
 			return err
 		}
+		return nil
 	}
-	return nil
 }
