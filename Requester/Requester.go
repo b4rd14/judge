@@ -14,6 +14,7 @@ type SubmissionMessage struct {
 	ProblemID      string
 	TestCaseNumber int
 	TimeLimit      time.Duration
+	Type           string
 	MemoryLimit    int64
 }
 
@@ -66,7 +67,8 @@ func Request() {
 	submission := SubmissionMessage{
 		SubmissionID:   "1",
 		ProblemID:      "1",
-		TimeLimit:      2 * time.Second,
+		TimeLimit:      2500 * time.Millisecond,
+		Type:           "python",
 		TestCaseNumber: 10,
 	}
 	submissionBytes, err := json.Marshal(submission)

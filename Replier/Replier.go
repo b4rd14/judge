@@ -1,6 +1,7 @@
 package replier
 
 import (
+	replier "GO/Judge/MINIO"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -21,6 +22,7 @@ type SubmissionResult struct {
 type SubmissionMessage struct {
 	SubmissionID   string
 	ProblemID      string
+	Type           string
 	TestCaseNumber int
 	TimeLimit      time.Duration
 	MemoryLimit    int64
@@ -77,6 +79,7 @@ func Reply() {
 	}
 
 	cli, err := NewClient()
+	minioClient, err := replier.NewMinIoClient()
 
 	for msg := range msgs {
 		var submission SubmissionMessage
@@ -84,16 +87,29 @@ func Reply() {
 		if err != nil {
 			log.Fatalf("%s: %s", "Failed to unmarshal message", err)
 		}
+		err = replier.Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
+		if err != nil {
+			log.Fatalf("%s: %s", "Failed to download problem", err)
+		}
+		err = replier.Download(context.Background(), minioClient, "submissions", submission.SubmissionID, "Submissions")
+		if err != nil {
+			log.Fatalf("%s: %s", "Failed to download submission", err)
+		}
 		msg := msg
-		go func() {
-			outputs, cli, resp, err := Run(cli, submission)
-			if err != nil {
-				log.Fatalf("%s: %s", "Failed to marshal output", err)
-			}
-			outputs = CheckTestCases(cli, resp.ID, outputs, submission)
-			fmt.Println(outputs)
-			msg.Ack(true)
-		}()
+		switch submission.Type {
+		case "python":
+			go func() {
+				outputs, cli, resp, err := Run(cli, submission)
+				if err != nil {
+					log.Fatalf("%s: %s", "Failed to marshal output", err)
+				}
+				outputs = CheckTestCases(cli, resp.ID, outputs, submission)
+				RemoveDir("Submissions/" + submission.SubmissionID)
+				fmt.Println(outputs)
+				msg.Ack(true)
+			}()
+		case "csv":
+		}
 
 	}
 
@@ -101,7 +117,7 @@ func Reply() {
 
 }
 func Run(cli *client.Client, submission SubmissionMessage) (map[string]string, *client.Client, container.CreateResponse, error) {
-	ProblemSRC := fmt.Sprintf("Problems/Problem%s/in", submission.ProblemID)
+	ProblemSRC := fmt.Sprintf("Problems/problem%s/in", submission.ProblemID)
 	SubmissionSRC := fmt.Sprintf("Submissions/%s/%s.py", submission.SubmissionID, submission.SubmissionID)
 	dest := "/home"
 	Outputs := make(map[string]string)
@@ -118,18 +134,18 @@ func Run(cli *client.Client, submission SubmissionMessage) (map[string]string, *
 
 	err = cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{})
 	if err != nil {
-
 		log.Fatal(err)
 	}
 
 	err = CopyDirToContainer(ctx, ProblemSRC, dest, cli, resp.ID)
 	if err != nil {
+		KillContainer(cli, ctx, resp.ID)
 		log.Fatalf("%s: %s", "Failed to copy problem to container", err)
-
 	}
 	err = CopyDirToContainer(ctx, SubmissionSRC, dest, cli, resp.ID)
 
 	if err != nil {
+		KillContainer(cli, ctx, resp.ID)
 		log.Fatalf("%s: %s", "Failed to copy submission to container", err)
 	}
 
@@ -153,6 +169,7 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 
 	execResp, err := cli.ContainerExecCreate(ctx, containerID, execConfig)
 	if err != nil {
+		KillContainer(cli, ctx, containerID)
 		log.Fatalf("%s: %s", "Failed to create exec", err)
 	}
 	cancelCtx, cancel := context.WithTimeout(ctx, submission.TimeLimit)
@@ -162,11 +179,13 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 	go func() {
 		execStartResp, err := cli.ContainerExecAttach(cancelCtx, execResp.ID, types.ExecStartCheck{})
 		if err != nil {
+			KillContainer(cli, ctx, containerID)
 			log.Fatalf("%s: %s", "Failed to attach exec", err)
 		}
 		output := make([]byte, 4096)
 		_, err = execStartResp.Reader.Read(output)
 		if err != nil && err != io.EOF {
+			KillContainer(cli, ctx, containerID)
 			log.Fatalf("%s: %s", "Failed to read from exec", err)
 		}
 		outCH <- output
@@ -214,7 +233,7 @@ func CheckTestCases(cli *client.Client, containerID string, output map[string]st
 			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Runtime Error"
 			continue
 		}
-		outputs[fmt.Sprintf("TestCase%d", i+1)] = CompareOutputs(fmt.Sprintf("Problems/Problem%s/out/output%d.txt", submission.ProblemID, i+1), fmt.Sprintf("Submissions/%s/out%d.txt", submission.SubmissionID, i+1))
+		outputs[fmt.Sprintf("TestCase%d", i+1)] = CompareOutputs(fmt.Sprintf("Problems/problem%s/out/output%d.txt", submission.ProblemID, i+1), fmt.Sprintf("Submissions/%s/out%d.txt", submission.SubmissionID, i+1))
 	}
 	return outputs
 }

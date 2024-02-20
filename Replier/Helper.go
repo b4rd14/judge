@@ -190,3 +190,45 @@ func TarToTxt(reader io.ReadCloser, ID string) {
 		}
 	}
 }
+
+func calculatePrecision(truePositives, falsePositives int) float64 {
+	if truePositives+falsePositives == 0 {
+		return 0.0
+	}
+
+	return float64(truePositives) / float64(truePositives+falsePositives)
+}
+
+func calculateRecall(truePositives, falseNegatives int) float64 {
+	if truePositives+falseNegatives == 0 {
+		return 0.0
+	}
+
+	return float64(truePositives) / float64(truePositives+falseNegatives)
+}
+
+func calculateFScore(precision, recall float64) float64 {
+	if precision+recall == 0 {
+		return 0.0
+	}
+
+	return 2 * ((precision * recall) / (precision + recall))
+}
+
+func AnalyzeCSV() {
+
+}
+
+func KillContainer(cli *client.Client, ctx context.Context, containerID string) {
+	err := cli.ContainerKill(ctx, containerID, "SIGKILL")
+	if err != nil {
+		log.Fatalf("%s: %s", "Failed to kill container", err)
+	}
+}
+
+func RemoveDir(dir string) {
+	err := os.RemoveAll(dir)
+	if err != nil {
+		log.Fatalf("%s: %s", "Failed to remove directory", err)
+	}
+}
