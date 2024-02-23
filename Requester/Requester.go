@@ -1,31 +1,23 @@
 package requester
 
 import (
+	replier "GO/Judge/Replier"
 	"context"
 	"encoding/json"
 	"fmt"
+	echo "github.com/labstack/echo/v4"
 	amqp "github.com/rabbitmq/amqp091-go"
 	"log"
 	"time"
 )
 
-type SubmissionMessage struct {
-	SubmissionID   string
-	ProblemID      string
-	TestCaseNumber int
-	TimeLimit      time.Duration
-	Type           string
-	MemoryLimit    int64
-}
-
-func Request() {
-
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+func Request(submissionMsg map[string]interface{}) error {
+	env := replier.NewEnv()
+	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s", env.RabbitmqUsername, env.RabbitmqPassword, env.RabbitmqUrl))
 
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to connect to RabbitMQ", err)
+		return err
 	}
-
 	fmt.Println("Connected to RabbitMQ")
 
 	defer func(conn *amqp.Connection) {
@@ -38,7 +30,7 @@ func Request() {
 	ch, err := conn.Channel()
 
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to open a channel", err)
+		return err
 	}
 
 	defer func(ch *amqp.Channel) {
@@ -58,22 +50,15 @@ func Request() {
 	)
 
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to declare a queue", err)
+		return err
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	submission := SubmissionMessage{
-		SubmissionID:   "1",
-		ProblemID:      "1",
-		TimeLimit:      1100 * time.Millisecond,
-		Type:           "python",
-		TestCaseNumber: 10,
-	}
-	submissionBytes, err := json.Marshal(submission)
+	submissionBytes, err := json.Marshal(submissionMsg)
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to marshal submission", err)
+		return err
 	}
 
 	err = ch.PublishWithContext(ctx, "", q.Name, false, false, amqp.Publishing{
@@ -82,9 +67,30 @@ func Request() {
 	})
 
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to publish a message", err)
+		return err
 	}
 
-	fmt.Println("Submission sent")
+	return nil
+}
 
+func Submit(c echo.Context) error {
+	submissionMsg := make(map[string]interface{})
+	err := c.Bind(&submissionMsg)
+	if err != nil {
+		return err
+	}
+	err = Request(submissionMsg)
+	if err != nil {
+		return err
+	}
+	return c.JSON(200, submissionMsg)
+}
+
+func StartServer() {
+	e := echo.New()
+	e.POST("/submit", Submit)
+	err := e.Start(":8080")
+	if err != nil {
+		return
+	}
 }

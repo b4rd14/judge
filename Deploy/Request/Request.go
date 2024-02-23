@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	requester.Request()
+	requester.StartServer()
 }

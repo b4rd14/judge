@@ -1,7 +1,7 @@
 package replier
 
 import (
-	replier "GO/Judge/MINIO"
+	model "GO/Judge/Model"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -11,22 +11,9 @@ import (
 	amqp "github.com/rabbitmq/amqp091-go"
 	"io"
 	"log"
+	"strconv"
 	"time"
 )
-
-type SubmissionResult struct {
-	SubmissionID string
-	ProblemID    string
-	Output       string
-}
-type SubmissionMessage struct {
-	SubmissionID   string
-	ProblemID      string
-	Type           string
-	TestCaseNumber int
-	TimeLimit      time.Duration
-	MemoryLimit    int64
-}
 
 func NewClient() (*client.Client, error) {
 	cli, err := client.NewClientWithOpts(client.WithVersion("1.41"))
@@ -36,89 +23,77 @@ func NewClient() (*client.Client, error) {
 	return cli, nil
 }
 
-func RunTestCases(ctx context.Context, cli *client.Client, respID string, Outputs map[string]string, submission SubmissionMessage) map[string]string {
-	for i := 0; i < submission.TestCaseNumber; i++ {
-		newCTX := context.WithValue(ctx, "TestCase", i+1)
-		output, err := RunExec(newCTX, cli, respID, fmt.Sprintf("python3 %s.py < input%d.txt > out%d.txt 2>out%d.txt ; echo done", submission.SubmissionID, i+1, i+1, i+1), submission)
-		if err != nil {
-			return nil
-		}
-		Outputs[fmt.Sprintf("TestCase%d", i+1)] = output
-	}
-	return Outputs
-}
-
 func Reply() {
+	env := NewEnv()
+	fmt.Println(env)
 
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s", env.RabbitmqUsername, env.RabbitmqPassword, env.RabbitmqUrl))
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to connect to RabbitMQ", err)
+		log.Printf("%s: %s", "Failed to connect to RabbitMQ", err)
 	}
-	defer func(conn *amqp.Connection) {
-		err := conn.Close()
-		if err != nil {
-			log.Fatalf("%s: %s", "Failed to close connection to RabbitMQ", err)
-		}
-	}(conn)
 	ch, err := conn.Channel()
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to open a channel", err)
+		log.Printf("%s: %s", "Failed to open a channel", err)
 	}
 	defer func(ch *amqp.Channel) {
 		err := ch.Close()
 		if err != nil {
-			log.Fatalf("%s: %s", "Failed to close channel", err)
+			log.Printf("%s: %s", "Failed to close channel", err)
 		}
 	}(ch)
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to declare a queue", err)
+		log.Printf("%s: %s", "Failed to declare a queue", err)
 	}
 	msgs, err := ch.Consume("submit", "", false, false, false, false, nil)
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to register a consumer", err)
+		log.Printf("%s: %s", "Failed to register a consumer", err)
+
 	}
-
 	cli, err := NewClient()
-	minioClient, err := replier.NewMinIoClient()
-
+	if err != nil {
+		log.Printf("%s: %s", "Failed to create docker client", err)
+		return
+	}
+	minioClient, err := NewMinIoClient()
+	if err != nil {
+		log.Printf("%s: %s", "Failed to create minio client", err)
+		return
+	}
 	for msg := range msgs {
-		var submission SubmissionMessage
+		var submission model.SubmissionMessage
+		fmt.Println(string(msg.Body))
 		err := json.Unmarshal(msg.Body, &submission)
 		if err != nil {
-			log.Fatalf("%s: %s", "Failed to unmarshal message", err)
+			msg.Ack(true)
+			log.Printf("%s: %s", "Failed to unmarshal message\n", err)
+			continue
 		}
-		err = replier.Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
+		err = Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
 		if err != nil {
-			log.Fatalf("%s: %s", "Failed to download problem", err)
+			msg.Ack(true)
+			log.Printf("%s: %s", "Failed to download problem\n", err)
+			continue
 		}
-		err = replier.Download(context.Background(), minioClient, "submissions", submission.SubmissionID, "Submissions")
+
+		err = Download(context.Background(), minioClient, "submissions", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), "Submissions")
 		if err != nil {
-			log.Fatalf("%s: %s", "Failed to download submission", err)
+			msg.Ack(true)
+			log.Printf("%s: %s", "Failed to download submission\n", err)
+			continue
 		}
 		msg := msg
 		switch submission.Type {
 		case "python":
-			go func() {
-				outputs, cli, resp, err := Run(cli, submission)
-				if err != nil {
-					log.Fatalf("%s: %s", "Failed to marshal output", err)
-				}
-				outputs = CheckTestCases(cli, resp.ID, outputs, submission)
-				RemoveDir("Submissions/" + submission.SubmissionID)
-				fmt.Println(outputs)
-				msg.Ack(true)
-			}()
+			go PythonJudge(msg, cli, submission)
 		case "csv":
 		}
-
 	}
-
 	select {}
 
 }
-func Run(cli *client.Client, submission SubmissionMessage) (map[string]string, *client.Client, container.CreateResponse, error) {
+func Run(cli *client.Client, submission model.SubmissionMessage) (map[string]string, *client.Client, container.CreateResponse, error) {
 	ProblemSRC := fmt.Sprintf("Problems/problem%s/in", submission.ProblemID)
-	SubmissionSRC := fmt.Sprintf("Submissions/%s/%s.py", submission.SubmissionID, submission.SubmissionID)
+	SubmissionSRC := fmt.Sprintf("Submissions/%s/%v.py", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), submission.TimeStamp)
 	dest := "/home"
 	Outputs := make(map[string]string)
 
@@ -129,37 +104,44 @@ func Run(cli *client.Client, submission SubmissionMessage) (map[string]string, *
 	}
 	resp, err := cli.ContainerCreate(ctx, config, nil, nil, nil, "")
 	if err != nil {
-		panic(err)
+		return nil, nil, container.CreateResponse{}, err
 	}
 
 	err = cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{})
 	if err != nil {
-		log.Fatal(err)
+		KillContainer(cli, ctx, resp.ID)
+		return nil, nil, container.CreateResponse{}, err
 	}
 
 	err = CopyDirToContainer(ctx, ProblemSRC, dest, cli, resp.ID)
 	if err != nil {
 		KillContainer(cli, ctx, resp.ID)
-		log.Fatalf("%s: %s", "Failed to copy problem to container", err)
+		log.Printf("%s: %s", "Failed to copy problem to container", err)
+		return nil, nil, container.CreateResponse{}, err
 	}
 	err = CopyDirToContainer(ctx, SubmissionSRC, dest, cli, resp.ID)
 
 	if err != nil {
 		KillContainer(cli, ctx, resp.ID)
-		log.Fatalf("%s: %s", "Failed to copy submission to container", err)
+		log.Printf("%s: %s", "Failed to copy submission to container", err)
+		return nil, nil, container.CreateResponse{}, err
 	}
 
 	Outputs = RunTestCases(ctx, cli, resp.ID, Outputs, submission)
 
 	err = cli.ContainerKill(ctx, resp.ID, "SIGKILL")
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to kill container", err)
+		log.Printf("%s: %s", "Failed to kill container", err)
+		return nil, nil, container.CreateResponse{}, err
 	}
 
 	return Outputs, cli, resp, nil
 }
 
-func RunExec(ctx context.Context, cli *client.Client, containerID, command string, submission SubmissionMessage) (string, error) {
+func RunExec(ctx context.Context, cli *client.Client, containerID, command string, submission model.SubmissionMessage) (string, error) {
+	memCh := make(chan struct{})
+	errCh := make(chan struct{})
+
 	execConfig := types.ExecConfig{
 		AttachStdout: true,
 		AttachStderr: true,
@@ -170,43 +152,55 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 	execResp, err := cli.ContainerExecCreate(ctx, containerID, execConfig)
 	if err != nil {
 		KillContainer(cli, ctx, containerID)
-		log.Fatalf("%s: %s", "Failed to create exec", err)
+		log.Printf("%s: %s", "Failed to create exec", err)
+		return "", err
 	}
 
+	go func() {
+		for {
+			stats, err := cli.ContainerStats(ctx, containerID, false)
+			if err != nil {
+				fmt.Printf("%s: %s", "Failed to get container stats", err)
+				errCh <- struct{}{}
+				return
+			}
+			var memStats types.MemoryStats
+			err = json.NewDecoder(stats.Body).Decode(&memStats)
+			if err != nil {
+				log.Printf("%s: %s", "Failed to decode memory stats", err)
+				errCh <- struct{}{}
+				return
+			}
+			if memStats.Usage > uint64(submission.MemoryLimit) {
+				memCh <- struct{}{}
+				return
+			}
+		}
+	}()
 	outCH := make(chan []byte)
 	go func() {
 		execStartResp, err := cli.ContainerExecAttach(ctx, execResp.ID, types.ExecStartCheck{})
 		if err != nil {
 			KillContainer(cli, ctx, containerID)
-			log.Fatalf("%s: %s", "Failed to attach exec", err)
+			log.Printf("%s: %s", "Failed to attach exec", err)
+			errCh <- struct{}{}
+			return
 		}
 		output := make([]byte, 4096)
 		_, err = execStartResp.Reader.Read(output)
 		if err != nil && err != io.EOF {
 			KillContainer(cli, ctx, containerID)
-			log.Fatalf("%s: %s", "Failed to read from exec", err)
+			log.Printf("%s: %s", "Failed to read from exec", err)
+			errCh <- struct{}{}
+			return
 		}
 		outCH <- output
 		execStartResp.Close()
 	}()
-
-	memCh := make(chan struct{})
 	for {
-		go func() {
-			stats, err := cli.ContainerStats(ctx, containerID, false)
-			if err != nil {
-				log.Fatalf("%s: %s", "Failed to get container stats", err)
-			}
-			var memStats types.MemoryStats
-			err = json.NewDecoder(stats.Body).Decode(&memStats)
-			if err != nil {
-				log.Fatalf("%s: %s", "Failed to decode memory stats", err)
-			}
-			if memStats.Usage > uint64(submission.MemoryLimit) {
-				memCh <- struct{}{}
-			}
-		}()
 		select {
+		case <-errCh:
+			return "", err
 		case <-memCh:
 			return "Memory Limit Exceeded", nil
 		case <-time.After(submission.TimeLimit + 50*time.Millisecond):
@@ -218,7 +212,19 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 
 }
 
-func CheckTestCases(cli *client.Client, containerID string, output map[string]string, submission SubmissionMessage) map[string]string {
+func RunTestCases(ctx context.Context, cli *client.Client, respID string, Outputs map[string]string, submission model.SubmissionMessage) map[string]string {
+	for i := 0; i < submission.TestCaseNumber; i++ {
+		newCTX := context.WithValue(ctx, "TestCase", i+1)
+		output, err := RunExec(newCTX, cli, respID, fmt.Sprintf("python3 %s.py < input%d.txt > out%d.txt 2>out%d.txt ; echo done", strconv.FormatInt(submission.TimeStamp, 10), i+1, i+1, i+1), submission)
+		if err != nil {
+			return nil
+		}
+		Outputs[fmt.Sprintf("TestCase%d", i+1)] = output
+	}
+	return Outputs
+}
+
+func CheckTestCases(cli *client.Client, containerID string, output map[string]string, submission model.SubmissionMessage) map[string]string {
 	outputs := make(map[string]string)
 	ctx := context.Background()
 
@@ -230,13 +236,13 @@ func CheckTestCases(cli *client.Client, containerID string, output map[string]st
 		src := fmt.Sprintf("/home/out%d.txt", i+1)
 		fromContainer, _, _ := cli.CopyFromContainer(ctx, containerID, src)
 
-		TarToTxt(fromContainer, submission.SubmissionID)
+		TarToTxt(fromContainer, submission)
 
-		if CheckRunTime(fmt.Sprintf("Submissions/%s/out%d.txt", submission.SubmissionID, i+1)) {
+		if CheckRunTime(fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), i+1)) {
 			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Runtime Error"
 			continue
 		}
-		outputs[fmt.Sprintf("TestCase%d", i+1)] = CompareOutputs(fmt.Sprintf("Problems/problem%s/out/output%d.txt", submission.ProblemID, i+1), fmt.Sprintf("Submissions/%s/out%d.txt", submission.SubmissionID, i+1))
+		outputs[fmt.Sprintf("TestCase%d", i+1)] = CompareOutputs(fmt.Sprintf("Problems/problem%s/out/output%d.txt", submission.ProblemID, i+1), fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), i+1))
 	}
 	return outputs
 }

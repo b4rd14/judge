@@ -14,11 +14,11 @@ type MinioConfig struct {
 }
 
 func NewMinIoClient() (*minio.Client, error) {
-
+	env := NewEnv()
 	cfg := MinioConfig{
-		Endpoint:  "koda-minio.darkube.app",
-		AccessKey: "cyjqJyZ8sDyx6plTovgu",
-		SecretKey: "pR7vftCo3lSaK6ONy3oG6risMtzhqx7HbUC8PxYa",
+		Endpoint:  env.MinioEndpoint,
+		AccessKey: env.MinioAccessKey,
+		SecretKey: env.MinioSecretKey,
 		UseSSL:    true,
 	}
 
@@ -45,15 +45,18 @@ func ListBuckets(client *minio.Client) ([]minio.BucketInfo, error) {
 }
 
 func Download(ctx context.Context, client *minio.Client, bucketName string, Prefix string, dirName string) error {
-	select {
-	case object := <-client.ListObjects(ctx, bucketName, minio.ListObjectsOptions{
+	objectCh := client.ListObjects(ctx, bucketName, minio.ListObjectsOptions{
 		Prefix:    Prefix,
 		Recursive: true,
-	}):
+	})
+	for object := range objectCh {
+		if object.Err != nil {
+			return object.Err
+		}
 		err := client.FGetObject(ctx, bucketName, object.Key, dirName+"/"+object.Key, minio.GetObjectOptions{})
 		if err != nil {
 			return err
 		}
-		return nil
 	}
+	return nil
 }

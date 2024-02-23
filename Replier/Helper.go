@@ -1,20 +1,23 @@
 package replier
 
 import (
+	model "GO/Judge/Model"
 	"archive/tar"
 	"context"
 	"fmt"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
+	amqp "github.com/rabbitmq/amqp091-go"
+	"github.com/spf13/viper"
 	"io"
 	"log"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 )
 
 func CopyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client.Client, id string) error {
-
 	archivePath := filepath.Join(os.TempDir(), "archive.tar")
 	archiveFile, err := os.Create(archivePath)
 	if err != nil {
@@ -32,9 +35,7 @@ func CopyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client
 
 		}
 	}(archiveFile)
-
 	tw := tar.NewWriter(archiveFile)
-
 	err = filepath.Walk(srcDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -128,7 +129,7 @@ func CheckRunTime(filename string) bool {
 func CompareOutputs(output1 string, output2 string) string {
 	out1, err := os.Open(output1)
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to open file", err)
+		log.Fatalf("%s: %s", "Failed to open file1", err)
 	}
 	defer func(out1 *os.File) {
 		err := out1.Close()
@@ -139,7 +140,7 @@ func CompareOutputs(output1 string, output2 string) string {
 
 	out2, err := os.Open(output2)
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to open file", err)
+		log.Fatalf("%s: %s", "Failed to open file2", err)
 	}
 	defer func(out2 *os.File) {
 		err := out2.Close()
@@ -164,7 +165,7 @@ func CompareOutputs(output1 string, output2 string) string {
 	}
 }
 
-func TarToTxt(reader io.ReadCloser, ID string) {
+func TarToTxt(reader io.ReadCloser, submission model.SubmissionMessage) {
 	read := tar.NewReader(reader)
 	for {
 		header, err := read.Next()
@@ -175,7 +176,7 @@ func TarToTxt(reader io.ReadCloser, ID string) {
 			fmt.Println(err)
 		}
 		if header.Typeflag == tar.TypeReg {
-			file, err := os.Create(fmt.Sprintf("Submissions/%s/%s", ID, filepath.Base(header.Name)))
+			file, err := os.Create(fmt.Sprintf("Submissions/%s/%s", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), filepath.Base(header.Name)))
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -191,34 +192,6 @@ func TarToTxt(reader io.ReadCloser, ID string) {
 	}
 }
 
-func calculatePrecision(truePositives, falsePositives int) float64 {
-	if truePositives+falsePositives == 0 {
-		return 0.0
-	}
-
-	return float64(truePositives) / float64(truePositives+falsePositives)
-}
-
-func calculateRecall(truePositives, falseNegatives int) float64 {
-	if truePositives+falseNegatives == 0 {
-		return 0.0
-	}
-
-	return float64(truePositives) / float64(truePositives+falseNegatives)
-}
-
-func calculateFScore(precision, recall float64) float64 {
-	if precision+recall == 0 {
-		return 0.0
-	}
-
-	return 2 * ((precision * recall) / (precision + recall))
-}
-
-func AnalyzeCSV() {
-
-}
-
 func KillContainer(cli *client.Client, ctx context.Context, containerID string) {
 	err := cli.ContainerKill(ctx, containerID, "SIGKILL")
 	if err != nil {
@@ -231,4 +204,61 @@ func RemoveDir(dir string) {
 	if err != nil {
 		log.Fatalf("%s: %s", "Failed to remove directory", err)
 	}
+}
+
+func NewEnv() *model.ENV {
+	env := model.ENV{}
+	viper.SetConfigFile(".env")
+	err := viper.ReadInConfig()
+	if err != nil {
+		log.Fatal("Can't find the file .env : ", err)
+	}
+	err = viper.Unmarshal(&env)
+	if err != nil {
+		log.Fatal("Environment can't be loaded: ", err)
+	}
+	return &env
+}
+
+func DeployRabbitMq() (*amqp.Connection, <-chan amqp.Delivery, error) {
+	conn, err := amqp.Dial("amqp://rabbitmq:DC6VaBq5WsR1pFG3gIAtJnA5euaNauyI@b9cf01c2-2518-496d-8cc0-f3c729bef2d7.hsvc.ir:31995")
+	if err != nil {
+		log.Printf("%s: %s", "Failed to connect to RabbitMQ", err)
+		return nil, nil, err
+	}
+	ch, err := conn.Channel()
+	if err != nil {
+		log.Printf("%s: %s", "Failed to open a channel", err)
+		return nil, nil, err
+	}
+	defer func(ch *amqp.Channel) {
+		err := ch.Close()
+		if err != nil {
+			log.Printf("%s: %s", "Failed to close channel", err)
+		}
+	}(ch)
+	if err != nil {
+		log.Printf("%s: %s", "Failed to declare a queue", err)
+		return nil, nil, err
+	}
+	msgs, err := ch.Consume("submit", "", false, false, false, false, nil)
+	if err != nil {
+		log.Printf("%s: %s", "Failed to register a consumer", err)
+		return nil, nil, err
+	}
+
+	return conn, msgs, nil
+}
+
+func PythonJudge(msg amqp.Delivery, cli *client.Client, submission model.SubmissionMessage) {
+	outputs, cli, resp, err := Run(cli, submission)
+	if err != nil {
+		log.Printf("%s: %s", "Failed to marshal output\n", err)
+		msg.Ack(true)
+		return
+	}
+	outputs = CheckTestCases(cli, resp.ID, outputs, submission)
+	log.Println(outputs)
+	RemoveDir("Submissions/" + submission.ProblemID + "/")
+	msg.Ack(true)
 }
