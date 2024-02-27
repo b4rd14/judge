@@ -1,0 +1,8 @@
+# Ignore compiled binaries
+*.exe
+*.dll
+*.so
+*.env
+
+# Ignore log files
+*.log
