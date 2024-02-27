@@ -15,6 +15,7 @@ import (
 )
 
 func NewClient() (*client.Client, error) {
+	defer recoverFromPanic()
 	cli, err := client.NewClientWithOpts(client.WithVersion("1.41"))
 	if err != nil {
 		return nil, err
@@ -23,6 +24,7 @@ func NewClient() (*client.Client, error) {
 }
 
 func Reply() {
+	defer recoverFromPanic()
 	msgs, err := DeployRabbitMq()
 	if err != nil {
 		return
@@ -71,6 +73,7 @@ func Reply() {
 
 }
 func Run(cli *client.Client, submission model.SubmissionMessage) (map[string]string, *client.Client, container.CreateResponse, error) {
+	defer recoverFromPanic()
 	ProblemSRC := fmt.Sprintf("Problems/problem%s/in", submission.ProblemID)
 	SubmissionSRC := fmt.Sprintf("Submissions/%s/%v.py", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), submission.TimeStamp)
 	dest := "/home"
@@ -118,6 +121,7 @@ func Run(cli *client.Client, submission model.SubmissionMessage) (map[string]str
 }
 
 func RunExec(ctx context.Context, cli *client.Client, containerID, command string, submission model.SubmissionMessage) (string, error) {
+	defer recoverFromPanic()
 	memCh := make(chan struct{})
 	errCh := make(chan struct{})
 
@@ -192,6 +196,7 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 }
 
 func RunTestCases(ctx context.Context, cli *client.Client, respID string, Outputs map[string]string, submission model.SubmissionMessage) map[string]string {
+	defer recoverFromPanic()
 	for i := 0; i < submission.TestCaseNumber; i++ {
 		newCTX := context.WithValue(ctx, "TestCase", i+1)
 		output, err := RunExec(newCTX, cli, respID, fmt.Sprintf("python3 %s.py < input%d.txt > out%d.txt 2>out%d.txt ; echo done", strconv.FormatInt(submission.TimeStamp, 10), i+1, i+1, i+1), submission)
@@ -204,6 +209,7 @@ func RunTestCases(ctx context.Context, cli *client.Client, respID string, Output
 }
 
 func CheckTestCases(cli *client.Client, containerID string, output map[string]string, submission model.SubmissionMessage) map[string]string {
+	defer recoverFromPanic()
 	outputs := make(map[string]string)
 	ctx := context.Background()
 

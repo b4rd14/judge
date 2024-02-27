@@ -8,6 +8,7 @@ import (
 )
 
 func CheckRunTime(filename string) bool {
+	defer recoverFromPanic()
 	file, err := os.Open(filename)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to open file", err)
@@ -30,6 +31,7 @@ func CheckRunTime(filename string) bool {
 }
 
 func CompareOutputs(output1 string, output2 string) string {
+	defer recoverFromPanic()
 	out1, err := os.Open(output1)
 	if err != nil {
 		log.Fatalf("%s: %s", "Failed to open file1", err)

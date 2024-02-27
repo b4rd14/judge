@@ -7,6 +7,7 @@ import (
 )
 
 func DeployRabbitMq() (<-chan amqp.Delivery, error) {
+	defer recoverFromPanic()
 	env := NewEnv()
 	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s", env.RabbitmqUsername, env.RabbitmqPassword, env.RabbitmqUrl))
 	if err != nil {

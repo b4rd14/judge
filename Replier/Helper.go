@@ -11,7 +11,14 @@ import (
 	"os"
 )
 
+func recoverFromPanic() {
+	if r := recover(); r != nil {
+		fmt.Println("Recovered:", r)
+	}
+}
+
 func PythonJudge(msg amqp.Delivery, cli *client.Client, submission model.SubmissionMessage) {
+	defer recoverFromPanic()
 	outputs, cli, resp, err := Run(cli, submission)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to marshal output\n", err)
@@ -28,6 +35,7 @@ func PythonJudge(msg amqp.Delivery, cli *client.Client, submission model.Submiss
 }
 
 func SendResult(res map[string]string, submission model.SubmissionMessage) error {
+	defer recoverFromPanic()
 	result := make(map[string]interface{})
 	result["submission_id"] = submission.SubmissionID
 	result["problem_id"] = submission.ProblemID
@@ -60,6 +68,7 @@ func SendResult(res map[string]string, submission model.SubmissionMessage) error
 }
 
 func RemoveDir(dir string) {
+	defer recoverFromPanic()
 	err := os.RemoveAll(dir)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to remove directory", err)
