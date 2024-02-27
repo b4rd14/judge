@@ -5,5 +5,8 @@ import (
 )
 
 func main() {
-	requester.StartServer()
+	err := requester.Request()
+	if err != nil {
+		return
+	}
 }

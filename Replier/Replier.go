@@ -8,7 +8,6 @@ import (
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
-	amqp "github.com/rabbitmq/amqp091-go"
 	"io"
 	"log"
 	"strconv"
@@ -24,30 +23,9 @@ func NewClient() (*client.Client, error) {
 }
 
 func Reply() {
-	env := NewEnv()
-	fmt.Println(env)
-
-	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s", env.RabbitmqUsername, env.RabbitmqPassword, env.RabbitmqUrl))
+	msgs, err := DeployRabbitMq()
 	if err != nil {
-		log.Printf("%s: %s", "Failed to connect to RabbitMQ", err)
-	}
-	ch, err := conn.Channel()
-	if err != nil {
-		log.Printf("%s: %s", "Failed to open a channel", err)
-	}
-	defer func(ch *amqp.Channel) {
-		err := ch.Close()
-		if err != nil {
-			log.Printf("%s: %s", "Failed to close channel", err)
-		}
-	}(ch)
-	if err != nil {
-		log.Printf("%s: %s", "Failed to declare a queue", err)
-	}
-	msgs, err := ch.Consume("submit", "", false, false, false, false, nil)
-	if err != nil {
-		log.Printf("%s: %s", "Failed to register a consumer", err)
-
+		return
 	}
 	cli, err := NewClient()
 	if err != nil {
@@ -59,6 +37,7 @@ func Reply() {
 		log.Printf("%s: %s", "Failed to create minio client", err)
 		return
 	}
+
 	for msg := range msgs {
 		var submission model.SubmissionMessage
 		fmt.Println(string(msg.Body))
@@ -203,7 +182,7 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 			return "", err
 		case <-memCh:
 			return "Memory Limit Exceeded", nil
-		case <-time.After(submission.TimeLimit + 50*time.Millisecond):
+		case <-time.After(submission.TimeLimit + 200*time.Millisecond):
 			return "Time Limit Exceeded", nil
 		case output1 := <-outCH:
 			return string(output1), nil

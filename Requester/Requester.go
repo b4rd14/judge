@@ -2,16 +2,12 @@ package requester
 
 import (
 	replier "GO/Judge/Replier"
-	"context"
-	"encoding/json"
 	"fmt"
-	echo "github.com/labstack/echo/v4"
 	amqp "github.com/rabbitmq/amqp091-go"
 	"log"
-	"time"
 )
 
-func Request(submissionMsg map[string]interface{}) error {
+func Request() error {
 	env := replier.NewEnv()
 	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s", env.RabbitmqUsername, env.RabbitmqPassword, env.RabbitmqUrl))
 
@@ -32,7 +28,6 @@ func Request(submissionMsg map[string]interface{}) error {
 	if err != nil {
 		return err
 	}
-
 	defer func(ch *amqp.Channel) {
 		err := ch.Close()
 		if err != nil {
@@ -40,8 +35,8 @@ func Request(submissionMsg map[string]interface{}) error {
 		}
 	}(ch)
 
-	q, err := ch.QueueDeclare(
-		"submit",
+	_, err = ch.QueueDeclare(
+		"result",
 		false,
 		false,
 		false,
@@ -53,44 +48,5 @@ func Request(submissionMsg map[string]interface{}) error {
 		return err
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-	defer cancel()
-
-	submissionBytes, err := json.Marshal(submissionMsg)
-	if err != nil {
-		return err
-	}
-
-	err = ch.PublishWithContext(ctx, "", q.Name, false, false, amqp.Publishing{
-		ContentType: "application/json",
-		Body:        submissionBytes,
-	})
-
-	if err != nil {
-		return err
-	}
-
 	return nil
-}
-
-func Submit(c echo.Context) error {
-	submissionMsg := make(map[string]interface{})
-	err := c.Bind(&submissionMsg)
-	if err != nil {
-		return err
-	}
-	err = Request(submissionMsg)
-	if err != nil {
-		return err
-	}
-	return c.JSON(200, submissionMsg)
-}
-
-func StartServer() {
-	e := echo.New()
-	e.POST("/submit", Submit)
-	err := e.Start(":8080")
-	if err != nil {
-		return
-	}
 }

@@ -1,21 +1,15 @@
 package replier
 
 import (
+	model "GO/Judge/Model"
 	"context"
 	minio "github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 )
 
-type MinioConfig struct {
-	Endpoint  string
-	AccessKey string
-	SecretKey string
-	UseSSL    bool
-}
-
 func NewMinIoClient() (*minio.Client, error) {
 	env := NewEnv()
-	cfg := MinioConfig{
+	cfg := model.MinioConfig{
 		Endpoint:  env.MinioEndpoint,
 		AccessKey: env.MinioAccessKey,
 		SecretKey: env.MinioSecretKey,
