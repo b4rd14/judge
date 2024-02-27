@@ -2,7 +2,11 @@
 *.exe
 *.dll
 *.so
-*.env
+
 
 # Ignore log files
 *.log
+
+
+# Ignore .env files
+.env
