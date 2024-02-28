@@ -26,19 +26,6 @@ func NewMinIoClient() (*minio.Client, error) {
 
 }
 
-func NewBucket(client *minio.Client, bucketName string) error {
-	err := client.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{
-		ObjectLocking: false,
-		Region:        "us-east-1",
-	})
-	return err
-}
-
-func ListBuckets(client *minio.Client) ([]minio.BucketInfo, error) {
-	buckets, err := client.ListBuckets(context.Background())
-	return buckets, err
-}
-
 func Download(ctx context.Context, client *minio.Client, bucketName string, Prefix string, dirName string) error {
 	defer recoverFromPanic()
 	objectCh := client.ListObjects(ctx, bucketName, minio.ListObjectsOptions{

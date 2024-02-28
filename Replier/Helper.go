@@ -23,7 +23,10 @@ func PythonJudge(msg amqp.Delivery, cli *client.Client, submission model.Submiss
 	outputs, cli, resp, err := Run(cli, submission)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to marshal output\n", err)
-		msg.Ack(true)
+		err := msg.Ack(true)
+		if err != nil {
+			return
+		}
 		return
 	}
 	outputs = CheckTestCases(cli, resp.ID, outputs, submission)
@@ -31,8 +34,11 @@ func PythonJudge(msg amqp.Delivery, cli *client.Client, submission model.Submiss
 	if err != nil {
 		log.Printf("%s: %s", "Failed to send result\n", err)
 	}
-	//RemoveDir("Submissions/" + submission.ProblemID + "/")
-	msg.Ack(true)
+	RemoveDir("Submissions/" + submission.ProblemID + "/")
+	err = msg.Ack(true)
+	if err != nil {
+		return
+	}
 }
 
 func SendResult(res map[string]string, submission model.SubmissionMessage) error {
@@ -82,16 +88,15 @@ func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Clien
 		log.Printf("%s: %s", "Failed to unmarshal message\n", err)
 		return err
 	}
-	//err = Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
-	//if err != nil {
-	//	err := msg.Ack(true)
-	//	if err != nil {
-	//		return err
-	//	}
-	//	log.Printf("%s: %s", "Failed to download problem\n", err)
-	//	return err
-	//}
-
+	err = Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
+	if err != nil {
+		err := msg.Ack(true)
+		if err != nil {
+			return err
+		}
+		log.Printf("%s: %s", "Failed to download problem\n", err)
+		return err
+	}
 	err = Download(context.Background(), minioClient, "submissions", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), "Submissions")
 	if err != nil {
 		err := msg.Ack(true)

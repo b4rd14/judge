@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 	"io"
 	"log"
@@ -14,14 +13,6 @@ import (
 	"path/filepath"
 	"strconv"
 )
-
-type Docker interface {
-	NewDockerClint() (*client.Client, error)
-	CreateContainer(cli *client.Client, ctx context.Context, submission model.SubmissionMessage) (container.CreateResponse, error)
-	StartContainer(cli *client.Client, ctx context.Context, containerID string) error
-	CopyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client.Client, id string) error
-	KillContainer(cli *client.Client, ctx context.Context, containerID string)
-}
 
 func NewDockerClint() (*client.Client, error) {
 	defer recoverFromPanic()
