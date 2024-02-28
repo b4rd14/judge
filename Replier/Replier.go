@@ -14,22 +14,13 @@ import (
 	"time"
 )
 
-func NewClient() (*client.Client, error) {
-	defer recoverFromPanic()
-	cli, err := client.NewClientWithOpts(client.WithVersion("1.41"))
-	if err != nil {
-		return nil, err
-	}
-	return cli, nil
-}
-
 func Reply() {
 	defer recoverFromPanic()
 	msgs, err := DeployRabbitMq()
 	if err != nil {
 		return
 	}
-	cli, err := NewClient()
+	cli, err := NewDockerClint()
 	if err != nil {
 		log.Printf("%s: %s", "Failed to create docker client", err)
 		return
@@ -41,32 +32,9 @@ func Reply() {
 	}
 
 	for msg := range msgs {
-		var submission model.SubmissionMessage
-		fmt.Println(string(msg.Body))
-		err := json.Unmarshal(msg.Body, &submission)
+		err := SendToJudge(msg, minioClient, cli)
 		if err != nil {
-			msg.Ack(true)
-			log.Printf("%s: %s", "Failed to unmarshal message\n", err)
 			continue
-		}
-		err = Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
-		if err != nil {
-			msg.Ack(true)
-			log.Printf("%s: %s", "Failed to download problem\n", err)
-			continue
-		}
-
-		err = Download(context.Background(), minioClient, "submissions", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), "Submissions")
-		if err != nil {
-			msg.Ack(true)
-			log.Printf("%s: %s", "Failed to download submission\n", err)
-			continue
-		}
-		msg := msg
-		switch submission.Type {
-		case "python":
-			go PythonJudge(msg, cli, submission)
-		case "csv":
 		}
 	}
 	select {}
@@ -111,11 +79,7 @@ func Run(cli *client.Client, submission model.SubmissionMessage) (map[string]str
 
 	Outputs = RunTestCases(ctx, cli, resp.ID, Outputs, submission)
 
-	err = cli.ContainerKill(ctx, resp.ID, "SIGKILL")
-	if err != nil {
-		log.Printf("%s: %s", "Failed to kill container", err)
-		return nil, nil, container.CreateResponse{}, err
-	}
+	KillContainer(cli, ctx, resp.ID)
 
 	return Outputs, cli, resp, nil
 }

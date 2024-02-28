@@ -34,23 +34,23 @@ func CompareOutputs(output1 string, output2 string) string {
 	defer recoverFromPanic()
 	out1, err := os.Open(output1)
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to open file1", err)
+		log.Printf("%s: %s", "Failed to open file", err)
 	}
 	defer func(out1 *os.File) {
 		err := out1.Close()
 		if err != nil {
-
+			return
 		}
 	}(out1)
 
 	out2, err := os.Open(output2)
 	if err != nil {
-		log.Fatalf("%s: %s", "Failed to open file2", err)
+		log.Printf("%s: %s", "Failed to open file", err)
 	}
 	defer func(out2 *os.File) {
 		err := out2.Close()
 		if err != nil {
-
+			return
 		}
 	}(out2)
 
@@ -67,5 +67,13 @@ func CompareOutputs(output1 string, output2 string) string {
 		return "Accepted"
 	} else {
 		return "Wrong Answer"
+	}
+}
+
+func RemoveDir(dir string) {
+	defer recoverFromPanic()
+	err := os.RemoveAll(dir)
+	if err != nil {
+		log.Printf("%s: %s", "Failed to remove directory", err)
 	}
 }

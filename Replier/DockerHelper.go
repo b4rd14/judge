@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 	"io"
 	"log"
@@ -13,6 +14,23 @@ import (
 	"path/filepath"
 	"strconv"
 )
+
+type Docker interface {
+	NewDockerClint() (*client.Client, error)
+	CreateContainer(cli *client.Client, ctx context.Context, submission model.SubmissionMessage) (container.CreateResponse, error)
+	StartContainer(cli *client.Client, ctx context.Context, containerID string) error
+	CopyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client.Client, id string) error
+	KillContainer(cli *client.Client, ctx context.Context, containerID string)
+}
+
+func NewDockerClint() (*client.Client, error) {
+	defer recoverFromPanic()
+	cli, err := client.NewClientWithOpts(client.WithVersion("1.41"))
+	if err != nil {
+		return nil, err
+	}
+	return cli, nil
+}
 
 func CopyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client.Client, id string) error {
 	defer recoverFromPanic()
@@ -63,6 +81,7 @@ func CopyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client
 			defer func(file *os.File) {
 				err := file.Close()
 				if err != nil {
+					return
 				}
 			}(file)
 			_, err = io.Copy(tw, file)
@@ -70,7 +89,6 @@ func CopyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client
 				return err
 			}
 		}
-
 		return nil
 	})
 	if err != nil {
