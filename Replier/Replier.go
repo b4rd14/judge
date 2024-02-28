@@ -10,7 +10,6 @@ import (
 	"github.com/docker/docker/client"
 	"io"
 	"log"
-	"strconv"
 	"time"
 )
 
@@ -32,10 +31,12 @@ func Reply() {
 	}
 
 	for msg := range msgs {
-		err := SendToJudge(msg, minioClient, cli)
+		outputs, err := SendToJudge(msg, minioClient, cli)
 		if err != nil {
+			fmt.Println(err)
 			continue
 		}
+		fmt.Println(outputs)
 	}
 	select {}
 
@@ -43,7 +44,7 @@ func Reply() {
 func Run(cli *client.Client, submission model.SubmissionMessage) (map[string]string, *client.Client, container.CreateResponse, error) {
 	defer recoverFromPanic()
 	ProblemSRC := fmt.Sprintf("Problems/problem%s/in", submission.ProblemID)
-	SubmissionSRC := fmt.Sprintf("Submissions/%s/%v.py", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), submission.TimeStamp)
+	SubmissionSRC := fmt.Sprintf("Submissions/%s/%v.py", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, submission.TimeStamp)
 	dest := "/home"
 	Outputs := make(map[string]string)
 
@@ -163,7 +164,7 @@ func RunTestCases(ctx context.Context, cli *client.Client, respID string, Output
 	defer recoverFromPanic()
 	for i := 0; i < submission.TestCaseNumber; i++ {
 		newCTX := context.WithValue(ctx, "TestCase", i+1)
-		output, err := RunExec(newCTX, cli, respID, fmt.Sprintf("python3 %s.py < input%d.txt > out%d.txt 2>out%d.txt ; echo done", strconv.FormatInt(submission.TimeStamp, 10), i+1, i+1, i+1), submission)
+		output, err := RunExec(newCTX, cli, respID, fmt.Sprintf("python3 %s.py < input%d.txt > out%d.txt 2>out%d.txt ; echo done", submission.TimeStamp, i+1, i+1, i+1), submission)
 		if err != nil {
 			return nil
 		}
@@ -187,11 +188,11 @@ func CheckTestCases(cli *client.Client, containerID string, output map[string]st
 
 		TarToTxt(fromContainer, submission)
 
-		if CheckRunTime(fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), i+1)) {
+		if CheckRunTime(fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, i+1)) {
 			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Runtime Error"
 			continue
 		}
-		outputs[fmt.Sprintf("TestCase%d", i+1)] = CompareOutputs(fmt.Sprintf("Problems/problem%s/out/output%d.txt", submission.ProblemID, i+1), fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), i+1))
+		outputs[fmt.Sprintf("TestCase%d", i+1)] = CompareOutputs(fmt.Sprintf("Problems/problem%s/out/output%d.txt", submission.ProblemID, i+1), fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, i+1))
 	}
 	return outputs
 }

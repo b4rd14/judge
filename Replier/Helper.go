@@ -9,7 +9,6 @@ import (
 	"github.com/minio/minio-go/v7"
 	amqp "github.com/rabbitmq/amqp091-go"
 	"log"
-	"strconv"
 )
 
 func recoverFromPanic() {
@@ -18,16 +17,12 @@ func recoverFromPanic() {
 	}
 }
 
-func PythonJudge(msg amqp.Delivery, cli *client.Client, submission model.SubmissionMessage) {
+func PythonJudge(msg amqp.Delivery, cli *client.Client, submission model.SubmissionMessage) map[string]string {
 	defer recoverFromPanic()
 	outputs, cli, resp, err := Run(cli, submission)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to marshal output\n", err)
-		err := msg.Ack(true)
-		if err != nil {
-			return
-		}
-		return
+		msg.Ack(true)
 	}
 	outputs = CheckTestCases(cli, resp.ID, outputs, submission)
 	err = SendResult(outputs, submission)
@@ -35,10 +30,8 @@ func PythonJudge(msg amqp.Delivery, cli *client.Client, submission model.Submiss
 		log.Printf("%s: %s", "Failed to send result\n", err)
 	}
 	RemoveDir("Submissions/" + submission.ProblemID + "/")
-	err = msg.Ack(true)
-	if err != nil {
-		return
-	}
+	fmt.Println("Acked")
+	return outputs
 }
 
 func SendResult(res map[string]string, submission model.SubmissionMessage) error {
@@ -48,8 +41,6 @@ func SendResult(res map[string]string, submission model.SubmissionMessage) error
 	result["problem_id"] = submission.ProblemID
 	result["user_id"] = submission.UserID
 	result["results"] = res
-
-	fmt.Println(result)
 
 	env := NewEnv()
 	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s", env.RabbitmqUsername, env.RabbitmqPassword, env.RabbitmqUrl))
@@ -76,40 +67,48 @@ func SendResult(res map[string]string, submission model.SubmissionMessage) error
 	return nil
 }
 
-func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Client) error {
+func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Client) (map[string]string, error) {
 	var submission model.SubmissionMessage
 	fmt.Println(string(msg.Body))
 	err := json.Unmarshal(msg.Body, &submission)
 	if err != nil {
 		err := msg.Ack(true)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		log.Printf("%s: %s", "Failed to unmarshal message\n", err)
-		return err
+		return nil, err
 	}
 	err = Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
 	if err != nil {
 		err := msg.Ack(true)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		log.Printf("%s: %s", "Failed to download problem\n", err)
-		return err
+		return nil, err
 	}
-	err = Download(context.Background(), minioClient, "submissions", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), "Submissions")
+	err = Download(context.Background(), minioClient, "submissions", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, "Submissions")
 	if err != nil {
 		err := msg.Ack(true)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		log.Printf("%s: %s", "Failed to download submission\n", err)
-		return err
+		return nil, err
 	}
 	switch submission.Type {
 	case "python":
-		go PythonJudge(msg, cli, submission)
+		outChan := make(chan map[string]string)
+		go func() {
+			outChan <- PythonJudge(msg, cli, submission)
+		}()
+		select {
+		case outputs := <-outChan:
+			fmt.Println(outputs)
+			return outputs, nil
+		}
 	case "csv":
 	}
-	return nil
+	return nil, nil
 }

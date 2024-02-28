@@ -11,7 +11,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"strconv"
 )
 
 func NewDockerClint() (*client.Client, error) {
@@ -120,7 +119,7 @@ func TarToTxt(reader io.ReadCloser, submission model.SubmissionMessage) {
 			fmt.Println(err)
 		}
 		if header.Typeflag == tar.TypeReg {
-			file, err := os.Create(fmt.Sprintf("Submissions/%s/%s", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), filepath.Base(header.Name)))
+			file, err := os.Create(fmt.Sprintf("Submissions/%s/%s", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, filepath.Base(header.Name)))
 			if err != nil {
 				fmt.Println(err)
 			}

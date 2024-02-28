@@ -3,6 +3,8 @@ package Test
 import (
 	replier "GO/Judge/Replier"
 	"context"
+	"fmt"
+	amqp "github.com/rabbitmq/amqp091-go"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -54,4 +56,35 @@ func TestDownload(t *testing.T) {
 func TestDeployRabbitMq(t *testing.T) {
 	_, err := replier.DeployRabbitMq()
 	assert.Nil(t, err)
+}
+
+func TestSendToJudgeAccepted(t *testing.T) {
+	msg := amqp.Delivery{
+		ContentType: "application/json",
+		Body:        []byte(`{"ProblemID":"12","UserID":"test","TimeStamp":"Accepted","Type":"python","TestCaseNumber":10,"TimeLimit":1000000000,"MemoryLimit":256000000}`),
+	}
+	client, _ := replier.NewDockerClint()
+	minioClient, _ := replier.NewMinIoClient()
+	outputs, err := replier.SendToJudge(msg, minioClient, client)
+	fmt.Println(outputs)
+	assert.Nil(t, err)
+	assert.NotNil(t, outputs)
+
+	expected := map[string]string{"TestCase1": "Accepted", "TestCase2": "Accepted", "TestCase3": "Accepted", "TestCase4": "Accepted", "TestCase5": "Accepted", "TestCase6": "Accepted", "TestCase7": "Accepted", "TestCase8": "Accepted", "TestCase9": "Accepted", "TestCase10": "Accepted"}
+	assert.Equal(t, outputs, expected)
+}
+
+func TestSendToJudgeWrong(t *testing.T) {
+	msg := amqp.Delivery{
+		ContentType: "application/json",
+		Body:        []byte(`{"ProblemID":"12","UserID":"test","TimeStamp":"Wrong","Type":"python","TestCaseNumber":10,"TimeLimit":1000000000,"MemoryLimit":256000000}`),
+	}
+	client, _ := replier.NewDockerClint()
+	minioClient, _ := replier.NewMinIoClient()
+	outputs, err := replier.SendToJudge(msg, minioClient, client)
+	assert.Nil(t, err)
+	assert.NotNil(t, outputs)
+
+	expected := map[string]string{"TestCase1": "Wrong Answer", "TestCase2": "Wrong Answer", "TestCase3": "Wrong Answer", "TestCase4": "Wrong Answer", "TestCase5": "Wrong Answer", "TestCase6": "Wrong Answer", "TestCase7": "Wrong Answer", "TestCase8": "Wrong Answer", "TestCase9": "Wrong Answer", "TestCase10": "Wrong Answer"}
+	assert.Equal(t, expected, outputs)
 }

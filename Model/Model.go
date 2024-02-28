@@ -15,7 +15,7 @@ type SubmissionMessage struct {
 	SubmissionID   string
 	ProblemID      string
 	UserID         string
-	TimeStamp      int64
+	TimeStamp      string
 	Type           string
 	TestCaseNumber int
 	TimeLimit      time.Duration
