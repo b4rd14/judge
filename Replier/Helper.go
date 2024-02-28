@@ -82,15 +82,15 @@ func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Clien
 		log.Printf("%s: %s", "Failed to unmarshal message\n", err)
 		return err
 	}
-	err = Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
-	if err != nil {
-		err := msg.Ack(true)
-		if err != nil {
-			return err
-		}
-		log.Printf("%s: %s", "Failed to download problem\n", err)
-		return err
-	}
+	//err = Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
+	//if err != nil {
+	//	err := msg.Ack(true)
+	//	if err != nil {
+	//		return err
+	//	}
+	//	log.Printf("%s: %s", "Failed to download problem\n", err)
+	//	return err
+	//}
 
 	err = Download(context.Background(), minioClient, "submissions", submission.ProblemID+"/"+submission.UserID+"/"+strconv.FormatInt(submission.TimeStamp, 10), "Submissions")
 	if err != nil {

@@ -8,8 +8,7 @@ import (
 
 func DeployRabbitMq() (<-chan amqp.Delivery, error) {
 	defer recoverFromPanic()
-	env := NewEnv()
-	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s", env.RabbitmqUsername, env.RabbitmqPassword, env.RabbitmqUrl))
+	conn, err := NewRabbitMQConnection()
 	if err != nil {
 		log.Printf("%s: %s", "Failed to connect to RabbitMQ", err)
 		return nil, err
@@ -29,4 +28,9 @@ func DeployRabbitMq() (<-chan amqp.Delivery, error) {
 		return nil, err
 	}
 	return msgs, nil
+}
+
+func NewRabbitMQConnection() (*amqp.Connection, error) {
+	env := NewEnv()
+	return amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s", env.RabbitmqUsername, env.RabbitmqPassword, env.RabbitmqUrl))
 }
