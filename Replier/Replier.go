@@ -105,21 +105,21 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 	}
 
 	go func() {
+		var status types.Stats
+		stats, err := cli.ContainerStats(ctx, containerID, true)
 		for {
-			stats, err := cli.ContainerStats(ctx, containerID, false)
 			if err != nil {
 				fmt.Printf("%s: %s", "Failed to get container stats", err)
 				errCh <- struct{}{}
 				return
 			}
-			var memStats types.MemoryStats
-			err = json.NewDecoder(stats.Body).Decode(&memStats)
+			err = json.NewDecoder(stats.Body).Decode(&status)
 			if err != nil {
 				log.Printf("%s: %s", "Failed to decode memory stats", err)
 				errCh <- struct{}{}
 				return
 			}
-			if memStats.Usage > uint64(submission.MemoryLimit) {
+			if status.MemoryStats.Usage > uint64(submission.MemoryLimit) {
 				memCh <- struct{}{}
 				return
 			}
@@ -129,7 +129,6 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 	go func() {
 		execStartResp, err := cli.ContainerExecAttach(ctx, execResp.ID, types.ExecStartCheck{})
 		if err != nil {
-			KillContainer(cli, ctx, containerID)
 			log.Printf("%s: %s", "Failed to attach exec", err)
 			errCh <- struct{}{}
 			return
@@ -137,7 +136,6 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 		output := make([]byte, 4096)
 		_, err = execStartResp.Reader.Read(output)
 		if err != nil && err != io.EOF {
-			KillContainer(cli, ctx, containerID)
 			log.Printf("%s: %s", "Failed to read from exec", err)
 			errCh <- struct{}{}
 			return
@@ -181,6 +179,9 @@ func CheckTestCases(cli *client.Client, containerID string, output map[string]st
 	for i := 0; i < submission.TestCaseNumber; i++ {
 		if output[fmt.Sprintf("TestCase%d", i+1)] == "Time Limit Exceeded" {
 			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Time Limit Exceeded"
+			continue
+		} else if output[fmt.Sprintf("TestCase%d", i+1)] == "Memory Limit Exceeded" {
+			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Memory Limit Exceeded"
 			continue
 		}
 		src := fmt.Sprintf("/home/out%d.txt", i+1)

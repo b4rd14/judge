@@ -29,8 +29,7 @@ func PythonJudge(msg amqp.Delivery, cli *client.Client, submission model.Submiss
 	if err != nil {
 		log.Printf("%s: %s", "Failed to send result\n", err)
 	}
-	RemoveDir("Submissions/" + submission.ProblemID + "/")
-	fmt.Println("Acked")
+	//RemoveDir("Submissions/" + submission.ProblemID + "/")
 	return outputs
 }
 
