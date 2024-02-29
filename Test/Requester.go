@@ -40,15 +40,6 @@ func Request(submissionMsg map[string]interface{}) error {
 		}
 	}(ch)
 
-	q, err := ch.QueueDeclare(
-		"submit",
-		false,
-		false,
-		false,
-		false,
-		nil,
-	)
-
 	if err != nil {
 		return err
 	}
@@ -61,7 +52,7 @@ func Request(submissionMsg map[string]interface{}) error {
 		return err
 	}
 
-	err = ch.PublishWithContext(ctx, "", q.Name, false, false, amqp.Publishing{
+	err = ch.PublishWithContext(ctx, "", "submit", false, false, amqp.Publishing{
 		ContentType: "application/json",
 		Body:        submissionBytes,
 	})
@@ -80,6 +71,7 @@ func Submit(c echo.Context) error {
 		return err
 	}
 	err = Request(submissionMsg)
+	fmt.Println(submissionMsg)
 	if err != nil {
 		return err
 	}

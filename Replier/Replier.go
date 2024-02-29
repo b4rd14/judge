@@ -15,7 +15,7 @@ import (
 
 func Reply() {
 	defer recoverFromPanic()
-	msgs, err := DeployRabbitMq()
+	msgs, err := DeployRabbitMq("submit")
 	if err != nil {
 		return
 	}

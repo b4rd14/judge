@@ -25,35 +25,35 @@ func PythonJudge(msg amqp.Delivery, cli *client.Client, submission model.Submiss
 		msg.Ack(true)
 	}
 	outputs = CheckTestCases(cli, resp.ID, outputs, submission)
-	err = SendResult(outputs, submission)
+	_, err = SendResult(outputs, submission)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to send result\n", err)
 	}
-	//RemoveDir("Submissions/" + submission.ProblemID + "/")
+	RemoveDir("Submissions/" + submission.ProblemID + "/")
 	return outputs
 }
 
-func SendResult(res map[string]string, submission model.SubmissionMessage) error {
+func SendResult(res map[string]string, submission model.SubmissionMessage) (map[string]interface{}, error) {
 	defer recoverFromPanic()
 	result := make(map[string]interface{})
 	result["submission_id"] = submission.SubmissionID
 	result["problem_id"] = submission.ProblemID
 	result["user_id"] = submission.UserID
-	result["results"] = res
+	result["results"] = &res
 
 	env := NewEnv()
 	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s", env.RabbitmqUsername, env.RabbitmqPassword, env.RabbitmqUrl))
 	if err != nil {
-		return err
+		return nil, err
 	}
 	ch, err := conn.Channel()
 	if err != nil {
-		return err
+		return nil, err
 	}
 	ctx := context.Background()
 	resultJson, err := json.Marshal(result)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	err = ch.PublishWithContext(ctx, "", "result", false, false, amqp.Publishing{
 		ContentType: "application/json",
@@ -61,9 +61,9 @@ func SendResult(res map[string]string, submission model.SubmissionMessage) error
 	})
 
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	return result, nil
 }
 
 func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Client) (map[string]string, error) {
@@ -104,7 +104,6 @@ func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Clien
 		}()
 		select {
 		case outputs := <-outChan:
-			fmt.Println(outputs)
 			return outputs, nil
 		}
 	case "csv":

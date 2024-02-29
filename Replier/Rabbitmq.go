@@ -6,7 +6,7 @@ import (
 	"log"
 )
 
-func DeployRabbitMq() (<-chan amqp.Delivery, error) {
+func DeployRabbitMq(queueName string) (<-chan amqp.Delivery, error) {
 	defer recoverFromPanic()
 	conn, err := NewRabbitMQConnection()
 	if err != nil {
@@ -22,7 +22,7 @@ func DeployRabbitMq() (<-chan amqp.Delivery, error) {
 		log.Printf("%s: %s", "Failed to declare a queue", err)
 		return nil, err
 	}
-	msgs, err := ch.Consume("submit", "", false, false, false, false, nil)
+	msgs, err := ch.Consume(queueName, "", false, false, false, false, nil)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to register a consumer", err)
 		return nil, err
