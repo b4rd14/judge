@@ -7,7 +7,7 @@ import (
 )
 
 func DeployRabbitMq(queueName string) (<-chan amqp.Delivery, error) {
-	defer recoverFromPanic()
+	defer RecoverFromPanic()
 	conn, err := NewRabbitMQConnection()
 	if err != nil {
 		log.Printf("%s: %s", "Failed to connect to RabbitMQ", err)

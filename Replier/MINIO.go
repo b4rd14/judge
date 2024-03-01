@@ -8,7 +8,7 @@ import (
 )
 
 func NewMinIoClient() (*minio.Client, error) {
-	defer recoverFromPanic()
+	defer RecoverFromPanic()
 	env := NewEnv()
 	cfg := model.MinioConfig{
 		Endpoint:  env.MinioEndpoint,
@@ -27,7 +27,7 @@ func NewMinIoClient() (*minio.Client, error) {
 }
 
 func Download(ctx context.Context, client *minio.Client, bucketName string, Prefix string, dirName string) error {
-	defer recoverFromPanic()
+	defer RecoverFromPanic()
 	objectCh := client.ListObjects(ctx, bucketName, minio.ListObjectsOptions{
 		Prefix:    Prefix,
 		Recursive: true,

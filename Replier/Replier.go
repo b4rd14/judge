@@ -3,7 +3,6 @@ package replier
 import (
 	model "GO/Judge/Model"
 	"context"
-	"encoding/json"
 	"fmt"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
@@ -14,7 +13,7 @@ import (
 )
 
 func Reply() {
-	defer recoverFromPanic()
+	defer RecoverFromPanic()
 	msgs, err := DeployRabbitMq("submit")
 	if err != nil {
 		return
@@ -42,9 +41,11 @@ func Reply() {
 
 }
 func Run(cli *client.Client, submission model.SubmissionMessage) (map[string]string, *client.Client, container.CreateResponse, error) {
-	defer recoverFromPanic()
+	defer RecoverFromPanic()
 	ProblemSRC := fmt.Sprintf("Problems/problem%s/in", submission.ProblemID)
 	SubmissionSRC := fmt.Sprintf("Submissions/%s/%v.py", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, submission.TimeStamp)
+	memoryCommand := fmt.Sprintf("chmod +x memory.sh ; ./memory.sh %v.py", submission.TimeStamp)
+	memorySrc := fmt.Sprintf("memory.sh")
 	dest := "/home"
 	Outputs := make(map[string]string)
 
@@ -53,6 +54,7 @@ func Run(cli *client.Client, submission model.SubmissionMessage) (map[string]str
 		Image: "python",
 		Cmd:   []string{"sh", "-c", "while true; do sleep 1; done"},
 	}
+
 	resp, err := cli.ContainerCreate(ctx, config, nil, nil, nil, "")
 	if err != nil {
 		return nil, nil, container.CreateResponse{}, err
@@ -71,7 +73,8 @@ func Run(cli *client.Client, submission model.SubmissionMessage) (map[string]str
 		return nil, nil, container.CreateResponse{}, err
 	}
 	err = CopyDirToContainer(ctx, SubmissionSRC, dest, cli, resp.ID)
-
+	err = CopyDirToContainer(ctx, memorySrc, dest, cli, resp.ID)
+	err = RunMemoryExec(ctx, cli, resp.ID, memoryCommand)
 	if err != nil {
 		KillContainer(cli, ctx, resp.ID)
 		log.Printf("%s: %s", "Failed to copy submission to container", err)
@@ -86,8 +89,7 @@ func Run(cli *client.Client, submission model.SubmissionMessage) (map[string]str
 }
 
 func RunExec(ctx context.Context, cli *client.Client, containerID, command string, submission model.SubmissionMessage) (string, error) {
-	defer recoverFromPanic()
-	memCh := make(chan struct{})
+	defer RecoverFromPanic()
 	errCh := make(chan struct{})
 
 	execConfig := types.ExecConfig{
@@ -104,27 +106,6 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 		return "", err
 	}
 
-	go func() {
-		var status types.Stats
-		stats, err := cli.ContainerStats(ctx, containerID, true)
-		for {
-			if err != nil {
-				fmt.Printf("%s: %s", "Failed to get container stats", err)
-				errCh <- struct{}{}
-				return
-			}
-			err = json.NewDecoder(stats.Body).Decode(&status)
-			if err != nil {
-				log.Printf("%s: %s", "Failed to decode memory stats", err)
-				errCh <- struct{}{}
-				return
-			}
-			if status.MemoryStats.Usage > uint64(submission.MemoryLimit) {
-				memCh <- struct{}{}
-				return
-			}
-		}
-	}()
 	outCH := make(chan []byte)
 	go func() {
 		execStartResp, err := cli.ContainerExecAttach(ctx, execResp.ID, types.ExecStartCheck{})
@@ -147,8 +128,6 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 		select {
 		case <-errCh:
 			return "", err
-		case <-memCh:
-			return "Memory Limit Exceeded", nil
 		case <-time.After(submission.TimeLimit + 200*time.Millisecond):
 			return "Time Limit Exceeded", nil
 		case output1 := <-outCH:
@@ -159,7 +138,7 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 }
 
 func RunTestCases(ctx context.Context, cli *client.Client, respID string, Outputs map[string]string, submission model.SubmissionMessage) map[string]string {
-	defer recoverFromPanic()
+	defer RecoverFromPanic()
 	for i := 0; i < submission.TestCaseNumber; i++ {
 		newCTX := context.WithValue(ctx, "TestCase", i+1)
 		output, err := RunExec(newCTX, cli, respID, fmt.Sprintf("python3 %s.py < input%d.txt > out%d.txt 2>out%d.txt ; echo done", submission.TimeStamp, i+1, i+1, i+1), submission)
@@ -172,16 +151,12 @@ func RunTestCases(ctx context.Context, cli *client.Client, respID string, Output
 }
 
 func CheckTestCases(cli *client.Client, containerID string, output map[string]string, submission model.SubmissionMessage) map[string]string {
-	defer recoverFromPanic()
+	defer RecoverFromPanic()
 	outputs := make(map[string]string)
 	ctx := context.Background()
-
 	for i := 0; i < submission.TestCaseNumber; i++ {
 		if output[fmt.Sprintf("TestCase%d", i+1)] == "Time Limit Exceeded" {
 			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Time Limit Exceeded"
-			continue
-		} else if output[fmt.Sprintf("TestCase%d", i+1)] == "Memory Limit Exceeded" {
-			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Memory Limit Exceeded"
 			continue
 		}
 		src := fmt.Sprintf("/home/out%d.txt", i+1)
@@ -189,11 +164,39 @@ func CheckTestCases(cli *client.Client, containerID string, output map[string]st
 
 		TarToTxt(fromContainer, submission)
 
-		if CheckRunTime(fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, i+1)) {
+		if CheckRunTimeError(fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, i+1)) {
 			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Runtime Error"
+			continue
+		}
+		if CheckMemoryLimitError(fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, i+1)) {
+			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Memory Limit Exceeded"
 			continue
 		}
 		outputs[fmt.Sprintf("TestCase%d", i+1)] = CompareOutputs(fmt.Sprintf("Problems/problem%s/out/output%d.txt", submission.ProblemID, i+1), fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, i+1))
 	}
 	return outputs
+}
+
+func RunMemoryExec(ctx context.Context, cli *client.Client, containerID, command string) error {
+	defer RecoverFromPanic()
+	execConfig := types.ExecConfig{
+		AttachStdout: true,
+		AttachStderr: true,
+		Cmd:          []string{"sh", "-c", command},
+		WorkingDir:   "/home",
+	}
+	execResp, err := cli.ContainerExecCreate(ctx, containerID, execConfig)
+	if err != nil {
+		fmt.Println("Error creating exec instance:", err)
+		return err
+	}
+
+	resp, err := cli.ContainerExecAttach(ctx, execResp.ID, types.ExecStartCheck{})
+	if err != nil {
+		fmt.Println("Error attaching to exec instance:", err)
+		return err
+	}
+	defer resp.Close()
+
+	return err
 }

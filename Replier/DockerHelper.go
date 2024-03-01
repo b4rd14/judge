@@ -14,7 +14,7 @@ import (
 )
 
 func NewDockerClint() (*client.Client, error) {
-	defer recoverFromPanic()
+	defer RecoverFromPanic()
 	cli, err := client.NewClientWithOpts(client.WithVersion("1.41"))
 	if err != nil {
 		return nil, err
@@ -23,7 +23,7 @@ func NewDockerClint() (*client.Client, error) {
 }
 
 func CopyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client.Client, id string) error {
-	defer recoverFromPanic()
+	defer RecoverFromPanic()
 	archivePath := filepath.Join(os.TempDir(), "archive.tar")
 	archiveFile, err := os.Create(archivePath)
 	if err != nil {
@@ -108,7 +108,7 @@ func CopyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client
 }
 
 func TarToTxt(reader io.ReadCloser, submission model.SubmissionMessage) {
-	defer recoverFromPanic()
+	defer RecoverFromPanic()
 	read := tar.NewReader(reader)
 	for {
 		header, err := read.Next()
@@ -136,7 +136,7 @@ func TarToTxt(reader io.ReadCloser, submission model.SubmissionMessage) {
 }
 
 func KillContainer(cli *client.Client, ctx context.Context, containerID string) {
-	defer recoverFromPanic()
+	defer RecoverFromPanic()
 	err := cli.ContainerKill(ctx, containerID, "SIGKILL")
 	if err != nil {
 		log.Printf("%s: %s", "Failed to kill container", err)

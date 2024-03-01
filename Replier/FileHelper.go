@@ -7,8 +7,8 @@ import (
 	"strings"
 )
 
-func CheckRunTime(filename string) bool {
-	defer recoverFromPanic()
+func CheckRunTimeError(filename string) bool {
+	defer RecoverFromPanic()
 	file, err := os.Open(filename)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to open file", err)
@@ -30,8 +30,31 @@ func CheckRunTime(filename string) bool {
 	return false
 }
 
+func CheckMemoryLimitError(filename string) bool {
+	defer RecoverFromPanic()
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Printf("%s: %s", "Failed to open file", err)
+	}
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+		}
+	}(file)
+
+	out := make([]byte, 4096)
+	_, err = file.Read(out)
+	if err != nil {
+		log.Printf("%s: %s , %s", "Failed to read from file", err, filename)
+	}
+	if strings.Contains(string(out), "Terminated") {
+		return true
+	}
+	return false
+}
+
 func CompareOutputs(output1 string, output2 string) string {
-	defer recoverFromPanic()
+	defer RecoverFromPanic()
 	out1, err := os.Open(output1)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to open file", err)
@@ -63,6 +86,7 @@ func CompareOutputs(output1 string, output2 string) string {
 	if err != nil {
 		log.Printf("%s: %s", "Failed to read from file", err)
 	}
+
 	if strings.TrimSpace(string(out1Bytes)) == strings.TrimSpace(string(out2Bytes)) {
 		return "Accepted"
 	} else {
@@ -71,7 +95,7 @@ func CompareOutputs(output1 string, output2 string) string {
 }
 
 func RemoveDir(dir string) {
-	defer recoverFromPanic()
+	defer RecoverFromPanic()
 	err := os.RemoveAll(dir)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to remove directory", err)

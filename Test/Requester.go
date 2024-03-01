@@ -15,11 +15,6 @@ func Request(submissionMsg map[string]interface{}) error {
 	env := replier.NewEnv()
 	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s", env.RabbitmqUsername, env.RabbitmqPassword, env.RabbitmqUrl))
 
-	if err != nil {
-		return err
-	}
-	fmt.Println("Connected to RabbitMQ")
-
 	defer func(conn *amqp.Connection) {
 		err := conn.Close()
 		if err != nil {
