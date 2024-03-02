@@ -20,11 +20,11 @@ func MockSendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.C
 		log.Printf("%s: %s", "Failed to unmarshal message\n", err)
 		return nil, err
 	}
-	//err = replier.Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
-	//if err != nil {
-	//	log.Printf("%s: %s", "Failed to download problem\n", err)
-	//	return nil, err
-	//}
+	err = replier.Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
+	if err != nil {
+		log.Printf("%s: %s", "Failed to download problem\n", err)
+		return nil, err
+	}
 	err = replier.Download(context.Background(), minioClient, "submissions", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, "Submissions")
 	if err != nil {
 		log.Printf("%s: %s", "Failed to download submission\n", err)
@@ -52,6 +52,6 @@ func MockPythonJudge(cli *client.Client, submission model.SubmissionMessage) map
 		log.Printf("%s: %s", "Failed to marshal output\n", err)
 	}
 	outputs = replier.CheckTestCases(cli, resp.ID, outputs, submission)
-	//replier.RemoveDir("Submissions/" + submission.ProblemID + "/")
+	replier.RemoveDir("Submissions/" + submission.ProblemID + "/")
 	return outputs
 }

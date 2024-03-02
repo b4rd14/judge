@@ -1,6 +1,7 @@
 package Test
 
 import (
+	model "GO/Judge/Model"
 	replier "GO/Judge/Replier"
 	"context"
 	"encoding/json"
@@ -11,7 +12,7 @@ import (
 	"time"
 )
 
-func Request(submissionMsg map[string]interface{}) error {
+func Request(submissionMsg model.SubmissionMessage) error {
 	env := replier.NewEnv()
 	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s", env.RabbitmqUsername, env.RabbitmqPassword, env.RabbitmqUrl))
 
@@ -46,7 +47,14 @@ func Request(submissionMsg map[string]interface{}) error {
 	if err != nil {
 		return err
 	}
-
+	_, err = ch.QueueDeclare(
+		"submit",
+		false,
+		false,
+		false,
+		false,
+		nil,
+	)
 	err = ch.PublishWithContext(ctx, "", "submit", false, false, amqp.Publishing{
 		ContentType: "application/json",
 		Body:        submissionBytes,
@@ -60,7 +68,7 @@ func Request(submissionMsg map[string]interface{}) error {
 }
 
 func Submit(c echo.Context) error {
-	submissionMsg := make(map[string]interface{})
+	submissionMsg := model.SubmissionMessage{}
 	err := c.Bind(&submissionMsg)
 	if err != nil {
 		return err

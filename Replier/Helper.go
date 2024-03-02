@@ -17,7 +17,7 @@ func RecoverFromPanic() {
 	}
 }
 
-func PythonJudge(msg amqp.Delivery, cli *client.Client, submission model.SubmissionMessage) map[string]string {
+func PythonJudge(cli *client.Client, submission model.SubmissionMessage) map[string]string {
 	defer RecoverFromPanic()
 	outputs, cli, resp, err := Run(cli, submission)
 	if err != nil {
@@ -67,12 +67,8 @@ func SendResult(res map[string]string, submission model.SubmissionMessage) (map[
 
 func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Client) (map[string]string, error) {
 	var submission model.SubmissionMessage
-	fmt.Println(string(msg.Body))
-	err := msg.Ack(true)
-	if err != nil {
-		return nil, err
-	}
-	err = json.Unmarshal(msg.Body, &submission)
+	fmt.Println(string(msg.Body), "msg body")
+	err := json.Unmarshal(msg.Body, &submission)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to unmarshal message\n", err)
 		return nil, err
@@ -91,7 +87,7 @@ func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Clien
 	case "python":
 		outChan := make(chan map[string]string)
 		go func() {
-			outChan <- PythonJudge(msg, cli, submission)
+			outChan <- PythonJudge(cli, submission)
 		}()
 		select {
 		case outputs := <-outChan:

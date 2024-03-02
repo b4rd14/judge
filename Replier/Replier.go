@@ -7,6 +7,7 @@ import (
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
+	amqp "github.com/rabbitmq/amqp091-go"
 	"io"
 	"log"
 	"time"
@@ -14,7 +15,20 @@ import (
 
 func Reply() {
 	defer RecoverFromPanic()
-	msgs, err := DeployRabbitMq("submit")
+	msgs, err, conn, ch := DeployRabbitMq("submit")
+	defer func(conn *amqp.Connection) {
+		err := conn.Close()
+		if err != nil {
+			return
+		}
+	}(conn)
+
+	defer func(ch *amqp.Channel) {
+		err := ch.Close()
+		if err != nil {
+			return
+		}
+	}(ch)
 	if err != nil {
 		return
 	}
@@ -28,14 +42,21 @@ func Reply() {
 		log.Printf("%s: %s", "Failed to create minio client", err)
 		return
 	}
-
 	for msg := range msgs {
-		outputs, err := SendToJudge(msg, minioClient, cli)
-		if err != nil {
-			fmt.Println(err)
-			continue
-		}
-		fmt.Println(outputs)
+		msg := msg
+		go func() {
+			outputs, err := SendToJudge(msg, minioClient, cli)
+			err = msg.Ack(true)
+			if err != nil {
+				return
+			}
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			fmt.Println(outputs)
+		}()
+
 	}
 	select {}
 
