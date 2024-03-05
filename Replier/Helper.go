@@ -67,7 +67,7 @@ func SendResult(res map[string]string, submission model.SubmissionMessage) (map[
 
 func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Client) (map[string]string, error) {
 	var submission model.SubmissionMessage
-	fmt.Println(string(msg.Body), "msg body")
+	fmt.Println(string(msg.Body))
 	err := json.Unmarshal(msg.Body, &submission)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to unmarshal message\n", err)

@@ -45,6 +45,7 @@ func Reply() {
 	for msg := range msgs {
 		msg := msg
 		go func() {
+			start := time.Now()
 			outputs, err := SendToJudge(msg, minioClient, cli)
 			err = msg.Ack(true)
 			if err != nil {
@@ -54,7 +55,9 @@ func Reply() {
 				fmt.Println(err)
 				return
 			}
+			since := time.Since(start)
 			fmt.Println(outputs)
+			log.Println(since)
 		}()
 
 	}
