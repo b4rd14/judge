@@ -15,7 +15,19 @@ import (
 
 func Reply() {
 	defer RecoverFromPanic()
-	msgs, err, conn, ch := DeployRabbitMq("submit")
+	rds := NewRedisClient()
+	err := rds.Ping(context.Background()).Err()
+	if err != nil {
+		fmt.Println("you are donkey")
+		return
+	}
+	conn, err := NewRabbitMQConnection()
+	if err != nil {
+		return
+	}
+	//AddQueue("results", conn)
+
+	msgs, err, conn, ch := ReadQueue("submit", conn)
 	defer func(conn *amqp.Connection) {
 		err := conn.Close()
 		if err != nil {
@@ -46,18 +58,14 @@ func Reply() {
 		msg := msg
 		go func() {
 			start := time.Now()
-			outputs, err := SendToJudge(msg, minioClient, cli)
+			outputs, err := SendToJudge(msg, minioClient, cli, rds)
 			err = msg.Ack(true)
 			if err != nil {
 				return
 			}
-			if err != nil {
-				fmt.Println(err)
-				return
-			}
 			since := time.Since(start)
 			fmt.Println(outputs)
-			log.Println(since)
+			fmt.Println(since)
 		}()
 
 	}

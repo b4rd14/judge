@@ -8,6 +8,7 @@ import (
 	"github.com/docker/docker/client"
 	"github.com/minio/minio-go/v7"
 	amqp "github.com/rabbitmq/amqp091-go"
+	"github.com/redis/go-redis/v9"
 	"log"
 )
 
@@ -54,7 +55,7 @@ func SendResult(res map[string]string, submission model.SubmissionMessage) (map[
 	if err != nil {
 		return nil, err
 	}
-	err = ch.PublishWithContext(ctx, "", "result", false, false, amqp.Publishing{
+	err = ch.PublishWithContext(ctx, "", "results", false, false, amqp.Publishing{
 		ContentType: "application/json",
 		Body:        resultJson,
 	})
@@ -65,7 +66,7 @@ func SendResult(res map[string]string, submission model.SubmissionMessage) (map[
 	return result, nil
 }
 
-func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Client) (map[string]string, error) {
+func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Client, rds *redis.Client) (map[string]string, error) {
 	var submission model.SubmissionMessage
 	fmt.Println(string(msg.Body))
 	err := json.Unmarshal(msg.Body, &submission)
@@ -73,10 +74,16 @@ func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Clien
 		log.Printf("%s: %s", "Failed to unmarshal message\n", err)
 		return nil, err
 	}
-	err = Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
-	if err != nil {
-		log.Printf("%s: %s", "Failed to download problem\n", err)
-		return nil, err
+	if _, err := getProblem(submission.ProblemID, rds); err != nil {
+		err = Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
+		if err != nil {
+			log.Printf("%s: %s", "Failed to download problem\n", err)
+			return nil, err
+		}
+		err := setProblem(submission.ProblemID, rds)
+		if err != nil {
+			return nil, err
+		}
 	}
 	err = Download(context.Background(), minioClient, "submissions", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, "Submissions")
 	if err != nil {

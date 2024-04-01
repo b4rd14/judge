@@ -6,13 +6,8 @@ import (
 	"log"
 )
 
-func DeployRabbitMq(queueName string) (<-chan amqp.Delivery, error, *amqp.Connection, *amqp.Channel) {
+func ReadQueue(queueName string, conn *amqp.Connection) (<-chan amqp.Delivery, error, *amqp.Connection, *amqp.Channel) {
 	defer RecoverFromPanic()
-	conn, err := NewRabbitMQConnection()
-	if err != nil {
-		log.Printf("%s: %s", "Failed to connect to RabbitMQ", err)
-		return nil, err, nil, nil
-	}
 	ch, err := conn.Channel()
 	if err != nil {
 		log.Printf("%s: %s", "Failed to open a channel", err)
@@ -28,6 +23,19 @@ func DeployRabbitMq(queueName string) (<-chan amqp.Delivery, error, *amqp.Connec
 		return nil, err, nil, nil
 	}
 	return msgs, nil, conn, ch
+}
+
+func AddQueue(queueName string, conn *amqp.Connection) {
+	defer RecoverFromPanic()
+	ch, err := conn.Channel()
+	_, err = ch.QueueDeclare(queueName, false, false, false, false, nil)
+	if err != nil {
+		return
+	}
+	err = ch.Close()
+	if err != nil {
+		return
+	}
 }
 
 func NewRabbitMQConnection() (*amqp.Connection, error) {
