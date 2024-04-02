@@ -13,10 +13,6 @@ func ReadQueue(queueName string, conn *amqp.Connection) (<-chan amqp.Delivery, e
 		log.Printf("%s: %s", "Failed to open a channel", err)
 		return nil, err, nil, nil
 	}
-	if err != nil {
-		log.Printf("%s: %s", "Failed to declare a queue", err)
-		return nil, err, nil, nil
-	}
 	msgs, err := ch.Consume(queueName, "", false, false, false, false, nil)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to register a consumer", err)
