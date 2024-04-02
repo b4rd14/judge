@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GO/Judge/Replier"
+	replier "GO/Judge/Replier"
 )
 
 func main() {
