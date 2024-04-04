@@ -1,7 +1,6 @@
 package replier
 
 import (
-	model "GO/Judge/Model"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -18,22 +17,22 @@ func RecoverFromPanic() {
 	}
 }
 
-func PythonJudge(cli *client.Client, submission model.SubmissionMessage) map[string]string {
+func PythonJudge(cli *client.Client, submission SubmissionMessage) map[string]string {
 	defer RecoverFromPanic()
-	outputs, cli, resp, err := Run(cli, submission)
+	outputs, cli, resp, err := submission.Run(cli)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to marshal output\n", err)
 	}
-	outputs = CheckTestCases(cli, resp.ID, outputs, submission)
-	_, err = SendResult(outputs, submission)
+	result := outputs.CheckTestCases(cli, resp.ID, submission)
+	_, err = SendResult(result, submission)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to send result\n", err)
 	}
 	RemoveDir("Submissions/" + submission.ProblemID + "/")
-	return outputs
+	return result
 }
 
-func SendResult(res map[string]string, submission model.SubmissionMessage) (map[string]interface{}, error) {
+func SendResult(res map[string]string, submission SubmissionMessage) (map[string]interface{}, error) {
 	defer RecoverFromPanic()
 	result := make(map[string]interface{})
 	result["submission_id"] = submission.SubmissionID
@@ -67,20 +66,21 @@ func SendResult(res map[string]string, submission model.SubmissionMessage) (map[
 }
 
 func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Client, rds *redis.Client) (map[string]string, error) {
-	var submission model.SubmissionMessage
+	var submission SubmissionMessage
 	fmt.Println(string(msg.Body))
+	ctx := context.Background()
 	err := json.Unmarshal(msg.Body, &submission)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to unmarshal message\n", err)
 		return nil, err
 	}
-	if _, err := getProblem(submission.ProblemID, rds); err != nil {
+	if _, err := getProblem(ctx, rds, submission.ProblemID); err != nil {
 		err = Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
 		if err != nil {
 			log.Printf("%s: %s", "Failed to download problem\n", err)
 			return nil, err
 		}
-		err := setProblem(submission.ProblemID, rds)
+		err := setProblem(ctx, rds, submission.ProblemID)
 		if err != nil {
 			return nil, err
 		}

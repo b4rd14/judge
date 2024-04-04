@@ -1,13 +1,21 @@
 package replier
 
 import (
-	model "GO/Judge/Model"
 	"github.com/spf13/viper"
 	"log"
 )
 
-func NewEnv() *model.ENV {
-	env := model.ENV{}
+type ENV struct {
+	MinioAccessKey   string `mapstructure:"MINIO_ACCESS_KEY"`
+	MinioSecretKey   string `mapstructure:"MINIO_SECRET_KEY"`
+	MinioEndpoint    string `mapstructure:"MINIO_ENDPOINT"`
+	RabbitmqUsername string `mapstructure:"RABBITMQ_USERNAME"`
+	RabbitmqPassword string `mapstructure:"RABBITMQ_PASSWORD"`
+	RabbitmqUrl      string `mapstructure:"RABBITMQ_URL"`
+}
+
+func NewEnv() *ENV {
+	env := ENV{}
 	viper.SetConfigFile(".env")
 	err := viper.ReadInConfig()
 	if err != nil {

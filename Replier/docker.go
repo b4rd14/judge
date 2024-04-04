@@ -1,7 +1,6 @@
 package replier
 
 import (
-	model "GO/Judge/Model"
 	"archive/tar"
 	"context"
 	"fmt"
@@ -107,7 +106,7 @@ func CopyDirToContainer(ctx context.Context, srcDir, destDir string, cli *client
 	return nil
 }
 
-func TarToTxt(reader io.ReadCloser, submission model.SubmissionMessage) {
+func TarToTxt(reader io.ReadCloser, submission SubmissionMessage) {
 	defer RecoverFromPanic()
 	read := tar.NewReader(reader)
 	for {

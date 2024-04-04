@@ -1,41 +1,57 @@
 package replier
 
 import (
-	model "GO/Judge/Model"
 	"context"
 	"fmt"
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/client"
-	amqp "github.com/rabbitmq/amqp091-go"
 	"io"
 	"log"
 	"time"
+
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/client"
 )
+
+type SubmissionMessage struct {
+	SubmissionID   string
+	ProblemID      string
+	UserID         string
+	TimeStamp      string
+	Type           string
+	TestCaseNumber int
+	TimeLimit      time.Duration
+	MemoryLimit    int64
+}
+
+type JudgeOutput map[string]string
 
 func Reply() {
 	defer RecoverFromPanic()
 	rds := NewRedisClient()
 	err := rds.Ping(context.Background()).Err()
 	if err != nil {
-		fmt.Println("you are donkey")
+		fmt.Println("redis")
 		return
 	}
 	conn, err := NewRabbitMQConnection()
+	ch, err := conn.NewChannel()
 	if err != nil {
 		return
 	}
-	//AddQueue("results", conn)
+	msgs, err := ch.ReadQueue("submit")
+	ch.AddQueue("results")
 
-	msgs, err, conn, ch := ReadQueue("submit", conn)
-	defer func(conn *amqp.Connection) {
+	if err != nil {
+		return
+	}
+	defer func(conn *RabbitMQConnection) {
 		err := conn.Close()
 		if err != nil {
 			return
 		}
 	}(conn)
 
-	defer func(ch *amqp.Channel) {
+	defer func(ch *RabbitChannel) {
 		err := ch.Close()
 		if err != nil {
 			return
@@ -58,13 +74,13 @@ func Reply() {
 		msg := msg
 		go func() {
 			start := time.Now()
-			outputs, err := SendToJudge(msg, minioClient, cli, rds)
+			result, err := SendToJudge(msg, minioClient, cli, rds)
 			err = msg.Ack(true)
 			if err != nil {
 				return
 			}
 			since := time.Since(start)
-			fmt.Println(outputs)
+			fmt.Println(result)
 			fmt.Println(since)
 		}()
 
@@ -72,7 +88,7 @@ func Reply() {
 	select {}
 
 }
-func Run(cli *client.Client, submission model.SubmissionMessage) (map[string]string, *client.Client, container.CreateResponse, error) {
+func (submission *SubmissionMessage) Run(cli *client.Client) (JudgeOutput, *client.Client, container.CreateResponse, error) {
 	defer RecoverFromPanic()
 	ProblemSRC := fmt.Sprintf("Problems/problem%s/in", submission.ProblemID)
 	SubmissionSRC := fmt.Sprintf("Submissions/%s/%v.py", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, submission.TimeStamp)
@@ -113,14 +129,14 @@ func Run(cli *client.Client, submission model.SubmissionMessage) (map[string]str
 		return nil, nil, container.CreateResponse{}, err
 	}
 
-	Outputs = RunTestCases(ctx, cli, resp.ID, Outputs, submission)
+	Outputs = submission.RunTestCases(ctx, cli, resp.ID, Outputs)
 
 	KillContainer(cli, ctx, resp.ID)
 
 	return Outputs, cli, resp, nil
 }
 
-func RunExec(ctx context.Context, cli *client.Client, containerID, command string, submission model.SubmissionMessage) (string, error) {
+func (submission *SubmissionMessage) RunExec(ctx context.Context, cli *client.Client, containerID, command string) (string, error) {
 	defer RecoverFromPanic()
 	errCh := make(chan struct{})
 
@@ -169,11 +185,11 @@ func RunExec(ctx context.Context, cli *client.Client, containerID, command strin
 
 }
 
-func RunTestCases(ctx context.Context, cli *client.Client, respID string, Outputs map[string]string, submission model.SubmissionMessage) map[string]string {
+func (submission *SubmissionMessage) RunTestCases(ctx context.Context, cli *client.Client, respID string, Outputs JudgeOutput) JudgeOutput {
 	defer RecoverFromPanic()
 	for i := 0; i < submission.TestCaseNumber; i++ {
 		newCTX := context.WithValue(ctx, "TestCase", i+1)
-		output, err := RunExec(newCTX, cli, respID, fmt.Sprintf("python3 %s.py < input%d.txt > out%d.txt 2>out%d.txt ; echo done", submission.TimeStamp, i+1, i+1, i+1), submission)
+		output, err := submission.RunExec(newCTX, cli, respID, fmt.Sprintf("python3 %s.py < input%d.txt > out%d.txt 2>out%d.txt ; echo done", submission.TimeStamp, i+1, i+1, i+1))
 		if err != nil {
 			return nil
 		}
@@ -182,13 +198,13 @@ func RunTestCases(ctx context.Context, cli *client.Client, respID string, Output
 	return Outputs
 }
 
-func CheckTestCases(cli *client.Client, containerID string, output map[string]string, submission model.SubmissionMessage) map[string]string {
+func (output *JudgeOutput) CheckTestCases(cli *client.Client, containerID string, submission SubmissionMessage) map[string]string {
 	defer RecoverFromPanic()
-	outputs := make(map[string]string)
+	result := make(map[string]string)
 	ctx := context.Background()
 	for i := 0; i < submission.TestCaseNumber; i++ {
-		if output[fmt.Sprintf("TestCase%d", i+1)] == "Time Limit Exceeded" {
-			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Time Limit Exceeded"
+		if (*output)[fmt.Sprintf("TestCase%d", i+1)] == "Time Limit Exceeded" {
+			result[fmt.Sprintf("TestCase%d", i+1)] = "Time Limit Exceeded"
 			continue
 		}
 		src := fmt.Sprintf("/home/out%d.txt", i+1)
@@ -197,16 +213,16 @@ func CheckTestCases(cli *client.Client, containerID string, output map[string]st
 		TarToTxt(fromContainer, submission)
 
 		if CheckRunTimeError(fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, i+1)) {
-			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Runtime Error"
+			result[fmt.Sprintf("TestCase%d", i+1)] = "Runtime Error"
 			continue
 		}
 		if CheckMemoryLimitError(fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, i+1)) {
-			outputs[fmt.Sprintf("TestCase%d", i+1)] = "Memory Limit Exceeded"
+			result[fmt.Sprintf("TestCase%d", i+1)] = "Memory Limit Exceeded"
 			continue
 		}
-		outputs[fmt.Sprintf("TestCase%d", i+1)] = CompareOutputs(fmt.Sprintf("Problems/problem%s/out/output%d.txt", submission.ProblemID, i+1), fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, i+1))
+		result[fmt.Sprintf("TestCase%d", i+1)] = CompareOutputs(fmt.Sprintf("Problems/problem%s/out/output%d.txt", submission.ProblemID, i+1), fmt.Sprintf("Submissions/%s/out%d.txt", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, i+1))
 	}
-	return outputs
+	return result
 }
 
 func RunMemoryExec(ctx context.Context, cli *client.Client, containerID, command string) error {
