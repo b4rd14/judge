@@ -88,7 +88,7 @@ func Reply() {
 	select {}
 
 }
-func (submission *SubmissionMessage) Run(cli *client.Client) (JudgeOutput, *client.Client, container.CreateResponse, error) {
+func (submission *SubmissionMessage) Run(cli *client.Client) (JudgeOutput, container.CreateResponse, error) {
 	defer RecoverFromPanic()
 	ProblemSRC := fmt.Sprintf("Problems/problem%s/in", submission.ProblemID)
 	SubmissionSRC := fmt.Sprintf("Submissions/%s/%v.py", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, submission.TimeStamp)
@@ -105,20 +105,20 @@ func (submission *SubmissionMessage) Run(cli *client.Client) (JudgeOutput, *clie
 
 	resp, err := cli.ContainerCreate(ctx, config, nil, nil, nil, "")
 	if err != nil {
-		return nil, nil, container.CreateResponse{}, err
+		return nil, container.CreateResponse{}, err
 	}
 
 	err = cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{})
 	if err != nil {
 		KillContainer(cli, ctx, resp.ID)
-		return nil, nil, container.CreateResponse{}, err
+		return nil, container.CreateResponse{}, err
 	}
 
 	err = CopyDirToContainer(ctx, ProblemSRC, dest, cli, resp.ID)
 	if err != nil {
 		KillContainer(cli, ctx, resp.ID)
 		log.Printf("%s: %s", "Failed to copy problem to container", err)
-		return nil, nil, container.CreateResponse{}, err
+		return nil, container.CreateResponse{}, err
 	}
 	err = CopyDirToContainer(ctx, SubmissionSRC, dest, cli, resp.ID)
 	err = CopyDirToContainer(ctx, memorySrc, dest, cli, resp.ID)
@@ -126,14 +126,14 @@ func (submission *SubmissionMessage) Run(cli *client.Client) (JudgeOutput, *clie
 	if err != nil {
 		KillContainer(cli, ctx, resp.ID)
 		log.Printf("%s: %s", "Failed to copy submission to container", err)
-		return nil, nil, container.CreateResponse{}, err
+		return nil, container.CreateResponse{}, err
 	}
 
 	Outputs = submission.RunTestCases(ctx, cli, resp.ID, Outputs)
 
 	KillContainer(cli, ctx, resp.ID)
 
-	return Outputs, cli, resp, nil
+	return Outputs, resp, nil
 }
 
 func (submission *SubmissionMessage) RunExec(ctx context.Context, cli *client.Client, containerID, command string) (string, error) {

@@ -3,10 +3,11 @@ package Test
 import (
 	replier "GO/Judge/Replier"
 	"context"
-	"github.com/stretchr/testify/assert"
 	"sync"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var (
@@ -68,8 +69,16 @@ func TestDownload(t *testing.T) {
 }
 
 func TestDeployRabbitMq(t *testing.T) {
-	_, err, conn, ch := replier.DeployRabbitMq("result")
-	defer conn.Close()
-	defer ch.Close()
+	conn, err := replier.NewRabbitMQConnection()
+	assert.Nil(t, err)
+	ch, err := conn.NewChannel()
+	assert.Nil(t, err)
+	_, err = ch.ReadQueue("results")
+	defer func(ch *replier.RabbitChannel) {
+		err := ch.Close()
+		if err != nil {
+			return
+		}
+	}(ch)
 	assert.Nil(t, err)
 }

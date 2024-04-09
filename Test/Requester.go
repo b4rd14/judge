@@ -1,18 +1,18 @@
 package Test
 
 import (
-	model "GO/Judge/Model"
 	replier "GO/Judge/Replier"
 	"context"
 	"encoding/json"
 	"fmt"
-	echo "github.com/labstack/echo/v4"
-	amqp "github.com/rabbitmq/amqp091-go"
 	"log"
 	"time"
+
+	echo "github.com/labstack/echo/v4"
+	amqp "github.com/rabbitmq/amqp091-go"
 )
 
-func Request(submissionMsg model.SubmissionMessage) error {
+func Request(submissionMsg replier.SubmissionMessage) error {
 	env := replier.NewEnv()
 	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s", env.RabbitmqUsername, env.RabbitmqPassword, env.RabbitmqUrl))
 
@@ -35,10 +35,6 @@ func Request(submissionMsg model.SubmissionMessage) error {
 			log.Fatalf("%s: %s", "Failed to close channel", err)
 		}
 	}(ch)
-
-	if err != nil {
-		return err
-	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
@@ -68,7 +64,7 @@ func Request(submissionMsg model.SubmissionMessage) error {
 }
 
 func Submit(c echo.Context) error {
-	submissionMsg := model.SubmissionMessage{}
+	submissionMsg := replier.SubmissionMessage{}
 	err := c.Bind(&submissionMsg)
 	if err != nil {
 		return err

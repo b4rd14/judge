@@ -1,19 +1,19 @@
 package Test
 
 import (
-	model "GO/Judge/Model"
 	replier "GO/Judge/Replier"
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
+
 	"github.com/docker/docker/client"
 	"github.com/minio/minio-go/v7"
 	amqp "github.com/rabbitmq/amqp091-go"
-	"log"
 )
 
 func MockSendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Client) (map[string]string, error) {
-	var submission model.SubmissionMessage
+	var submission replier.SubmissionMessage
 	fmt.Println(string(msg.Body))
 	err := json.Unmarshal(msg.Body, &submission)
 	if err != nil {
@@ -45,13 +45,13 @@ func MockSendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.C
 	return nil, nil
 }
 
-func MockPythonJudge(cli *client.Client, submission model.SubmissionMessage) map[string]string {
+func MockPythonJudge(cli *client.Client, submission replier.SubmissionMessage) map[string]string {
 	defer replier.RecoverFromPanic()
-	outputs, cli, resp, err := replier.Run(cli, submission)
+	outputs, resp, err := submission.Run(cli)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to marshal output\n", err)
 	}
-	outputs = replier.CheckTestCases(cli, resp.ID, outputs, submission)
+	result := outputs.CheckTestCases(cli, resp.ID, submission)
 	replier.RemoveDir("Submissions/" + submission.ProblemID + "/")
-	return outputs
+	return result
 }

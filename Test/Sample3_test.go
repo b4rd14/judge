@@ -4,20 +4,36 @@ import (
 	replier "GO/Judge/Replier"
 	"bytes"
 	"encoding/json"
-	"github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestAcceptedWithRabbitMQ(t *testing.T) {
 	SetupJudge()
 	SetupServer()
-	submission := []byte(`{"SubmissionID":"12","ProblemID":"12","UserID":"test","TimeStamp":"Accepted","Type":"python","TestCaseNumber":10,"TimeLimit":1000000000,"MemoryLimit":256000000}`)
-	_, err := http.Post("http://localhost:8080/submit", "application/json", bytes.NewBuffer(submission))
+	conn, err := replier.NewRabbitMQConnection()
 	assert.Nil(t, err)
-	msgs, err, conn, ch := replier.DeployRabbitMq("result")
-	defer conn.Close()
-	defer ch.Close()
+	submission := []byte(`{"SubmissionID":"12","ProblemID":"12","UserID":"test","TimeStamp":"Accepted","Type":"python","TestCaseNumber":10,"TimeLimit":1000000000,"MemoryLimit":256000000}`)
+	_, err = http.Post("http://localhost:8080/submit", "application/json", bytes.NewBuffer(submission))
+	assert.Nil(t, err)
+	ch, err := conn.NewChannel()
+	assert.Nil(t, err)
+	msgs, err := ch.ReadQueue("results")
+	assert.Nil(t, err)
+	defer func(conn *replier.RabbitMQConnection) {
+		err := conn.Close()
+		if err != nil {
+			return
+		}
+	}(conn)
+	defer func(ch *replier.RabbitChannel) {
+		err := ch.Close()
+		if err != nil {
+			return
+		}
+	}(ch)
 	result := make(map[string]interface{})
 	for msg := range msgs {
 		msg.Ack(true)
@@ -33,12 +49,27 @@ func TestAcceptedWithRabbitMQ(t *testing.T) {
 func TestWrongWithRabbitMQ(t *testing.T) {
 	SetupJudge()
 	SetupServer()
-	submission := []byte(`{"SubmissionID":"12","ProblemID":"12","UserID":"test","TimeStamp":"Wrong","Type":"python","TestCaseNumber":10,"TimeLimit":1000000000,"MemoryLimit":256000000}`)
-	_, err := http.Post("http://localhost:8080/submit", "application/json", bytes.NewBuffer(submission))
+	conn, err := replier.NewRabbitMQConnection()
 	assert.Nil(t, err)
-	msgs, err, conn, ch := replier.DeployRabbitMq("result")
-	defer conn.Close()
-	defer ch.Close()
+	submission := []byte(`{"SubmissionID":"12","ProblemID":"12","UserID":"test","TimeStamp":"Wrong","Type":"python","TestCaseNumber":10,"TimeLimit":1000000000,"MemoryLimit":256000000}`)
+	_, err = http.Post("http://localhost:8080/submit", "application/json", bytes.NewBuffer(submission))
+	assert.Nil(t, err)
+	ch, err := conn.NewChannel()
+	assert.Nil(t, err)
+	msgs, err := ch.ReadQueue("results")
+	assert.Nil(t, err)
+	defer func(conn *replier.RabbitMQConnection) {
+		err := conn.Close()
+		if err != nil {
+			return
+		}
+	}(conn)
+	defer func(ch *replier.RabbitChannel) {
+		err := ch.Close()
+		if err != nil {
+			return
+		}
+	}(ch)
 	result := make(map[string]interface{})
 	for msg := range msgs {
 		msg.Ack(true)
@@ -54,12 +85,27 @@ func TestWrongWithRabbitMQ(t *testing.T) {
 func TestTimeLimitWithRabbitMQ(t *testing.T) {
 	SetupJudge()
 	SetupServer()
-	submission := []byte(`{"SubmissionID":"12","ProblemID":"12","UserID":"test","TimeStamp":"TimeLimit","Type":"python","TestCaseNumber":10,"TimeLimit":1000000000,"MemoryLimit":256000000}`)
-	_, err := http.Post("http://localhost:8080/submit", "application/json", bytes.NewBuffer(submission))
+	conn, err := replier.NewRabbitMQConnection()
 	assert.Nil(t, err)
-	msgs, err, conn, ch := replier.DeployRabbitMq("result")
-	defer conn.Close()
-	defer ch.Close()
+	submission := []byte(`{"SubmissionID":"12","ProblemID":"12","UserID":"test","TimeStamp":"TimeLimit","Type":"python","TestCaseNumber":10,"TimeLimit":1000000000,"MemoryLimit":256000000}`)
+	_, err = http.Post("http://localhost:8080/submit", "application/json", bytes.NewBuffer(submission))
+	assert.Nil(t, err)
+	ch, err := conn.NewChannel()
+	assert.Nil(t, err)
+	msgs, err := ch.ReadQueue("results")
+	assert.Nil(t, err)
+	defer func(conn *replier.RabbitMQConnection) {
+		err := conn.Close()
+		if err != nil {
+			return
+		}
+	}(conn)
+	defer func(ch *replier.RabbitChannel) {
+		err := ch.Close()
+		if err != nil {
+			return
+		}
+	}(ch)
 	result := make(map[string]interface{})
 	for msg := range msgs {
 		msg.Ack(true)
@@ -75,12 +121,27 @@ func TestTimeLimitWithRabbitMQ(t *testing.T) {
 func TestRunTimeWithRabbitMQ(t *testing.T) {
 	SetupJudge()
 	SetupServer()
-	submission := []byte(`{"SubmissionID":"12","ProblemID":"12","UserID":"test","TimeStamp":"Runtime","Type":"python","TestCaseNumber":10,"TimeLimit":1000000000,"MemoryLimit":256000000}`)
-	_, err := http.Post("http://localhost:8080/submit", "application/json", bytes.NewBuffer(submission))
+	conn, err := replier.NewRabbitMQConnection()
 	assert.Nil(t, err)
-	msgs, err, conn, ch := replier.DeployRabbitMq("result")
-	defer conn.Close()
-	defer ch.Close()
+	submission := []byte(`{"SubmissionID":"12","ProblemID":"12","UserID":"test","TimeStamp":"Runtime","Type":"python","TestCaseNumber":10,"TimeLimit":1000000000,"MemoryLimit":256000000}`)
+	_, err = http.Post("http://localhost:8080/submit", "application/json", bytes.NewBuffer(submission))
+	assert.Nil(t, err)
+	ch, err := conn.NewChannel()
+	assert.Nil(t, err)
+	msgs, err := ch.ReadQueue("results")
+	assert.Nil(t, err)
+	defer func(conn *replier.RabbitMQConnection) {
+		err := conn.Close()
+		if err != nil {
+			return
+		}
+	}(conn)
+	defer func(ch *replier.RabbitChannel) {
+		err := ch.Close()
+		if err != nil {
+			return
+		}
+	}(ch)
 	result := make(map[string]interface{})
 	for msg := range msgs {
 		msg.Ack(true)
@@ -96,12 +157,27 @@ func TestRunTimeWithRabbitMQ(t *testing.T) {
 func TestMemoryLimitWithRabbitMQ(t *testing.T) {
 	SetupJudge()
 	SetupServer()
-	submission := []byte(`{"SubmissionID":"12","ProblemID":"12","UserID":"test","TimeStamp":"Memory","Type":"python","TestCaseNumber":10,"TimeLimit":1000000000,"MemoryLimit":256000000}`)
-	_, err := http.Post("http://localhost:8080/submit", "application/json", bytes.NewBuffer(submission))
+	conn, err := replier.NewRabbitMQConnection()
 	assert.Nil(t, err)
-	msgs, err, conn, ch := replier.DeployRabbitMq("result")
-	defer conn.Close()
-	defer ch.Close()
+	submission := []byte(`{"SubmissionID":"12","ProblemID":"12","UserID":"test","TimeStamp":"Memory","Type":"python","TestCaseNumber":10,"TimeLimit":1000000000,"MemoryLimit":256000000}`)
+	_, err = http.Post("http://localhost:8080/submit", "application/json", bytes.NewBuffer(submission))
+	assert.Nil(t, err)
+	ch, err := conn.NewChannel()
+	assert.Nil(t, err)
+	msgs, err := ch.ReadQueue("results")
+	assert.Nil(t, err)
+	defer func(conn *replier.RabbitMQConnection) {
+		err := conn.Close()
+		if err != nil {
+			return
+		}
+	}(conn)
+	defer func(ch *replier.RabbitChannel) {
+		err := ch.Close()
+		if err != nil {
+			return
+		}
+	}(ch)
 	result := make(map[string]interface{})
 	for msg := range msgs {
 		msg.Ack(true)

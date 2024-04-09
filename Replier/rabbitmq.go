@@ -30,9 +30,6 @@ func (ch *RabbitChannel) AddQueue(queueName string) {
 	if err != nil {
 		return
 	}
-	if err != nil {
-		return
-	}
 }
 
 func NewRabbitMQConnection() (*RabbitMQConnection, error) {

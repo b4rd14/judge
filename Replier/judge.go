@@ -19,7 +19,7 @@ func RecoverFromPanic() {
 
 func PythonJudge(cli *client.Client, submission SubmissionMessage) map[string]string {
 	defer RecoverFromPanic()
-	outputs, cli, resp, err := submission.Run(cli)
+	outputs, resp, err := submission.Run(cli)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to marshal output\n", err)
 	}
