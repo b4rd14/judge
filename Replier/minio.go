@@ -1,17 +1,13 @@
 package replier
 
 import (
+	Type "GO/Judge/types"
 	"context"
 	minio "github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 )
 
-type MinioConfig struct {
-	Endpoint  string
-	AccessKey string
-	SecretKey string
-	UseSSL    bool
-}
+type MinioConfig Type.MinioConfig
 
 func NewMinIoClient() (*minio.Client, error) {
 	defer RecoverFromPanic()

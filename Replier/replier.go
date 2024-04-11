@@ -1,28 +1,18 @@
 package replier
 
 import (
+	Type "GO/Judge/types"
 	"context"
 	"fmt"
-	"io"
-	"log"
-	"time"
-
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
+	"io"
+	"log"
+	"time"
 )
 
-type SubmissionMessage struct {
-	SubmissionID   string
-	ProblemID      string
-	UserID         string
-	TimeStamp      string
-	Type           string
-	TestCaseNumber int
-	TimeLimit      time.Duration
-	MemoryLimit    int64
-}
-
+type SubmissionMessage Type.SubmissionMessage
 type JudgeOutput map[string]string
 
 func Reply() {
@@ -57,9 +47,6 @@ func Reply() {
 			return
 		}
 	}(ch)
-	if err != nil {
-		return
-	}
 	cli, err := NewDockerClint()
 	if err != nil {
 		log.Printf("%s: %s", "Failed to create docker client", err)
