@@ -17,7 +17,7 @@ func RecoverFromPanic() {
 	}
 }
 
-func PythonJudge(cli *client.Client, submission SubmissionMessage) map[string]string {
+func Judge(cli *client.Client, submission SubmissionMessage) map[string]string {
 	defer RecoverFromPanic()
 	outputs, resp, err := submission.Run(cli)
 	if err != nil {
@@ -65,16 +65,15 @@ func SendResult(res map[string]string, submission SubmissionMessage) (map[string
 	return result, nil
 }
 
-func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Client, rds *redis.Client) (map[string]string, error) {
+func Result(ctx context.Context, msg amqp.Delivery, minioClient *minio.Client, cli *client.Client, rds *redis.Client) (map[string]string, error) {
 	var submission SubmissionMessage
 	fmt.Println(string(msg.Body))
-	ctx := context.Background()
 	err := json.Unmarshal(msg.Body, &submission)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to unmarshal message\n", err)
 		return nil, err
 	}
-	if _, err := getProblem(ctx, rds, submission.ProblemID); err != nil {
+	if _, err := getProblem(context.Background(), rds, submission.ProblemID); err != nil {
 		err = Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
 		if err != nil {
 			log.Printf("%s: %s", "Failed to download problem\n", err)
@@ -90,17 +89,16 @@ func SendToJudge(msg amqp.Delivery, minioClient *minio.Client, cli *client.Clien
 		log.Printf("%s: %s", "Failed to download submission\n", err)
 		return nil, err
 	}
-	switch submission.Type {
-	case "python":
-		outChan := make(chan map[string]string)
-		go func() {
-			outChan <- PythonJudge(cli, submission)
-		}()
-		select {
-		case outputs := <-outChan:
-			return outputs, nil
-		}
-	case "csv":
+
+	outChan := make(chan map[string]string)
+	go func() {
+		outChan <- Judge(cli, submission)
+	}()
+	select {
+	case <-ctx.Done():
+		return map[string]string{"msg": "Result took too long"}, ctx.Err()
+	case outputs := <-outChan:
+		return outputs, nil
 	}
-	return nil, nil
+
 }
