@@ -61,7 +61,9 @@ func Reply() {
 		msg := msg
 		go func() {
 			start := time.Now()
-			result, err := SendToJudge(msg, minioClient, cli, rds)
+			ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+			defer cancel()
+			result, err := Result(ctx, msg, minioClient, cli, rds)
 			err = msg.Ack(true)
 			if err != nil {
 				return
