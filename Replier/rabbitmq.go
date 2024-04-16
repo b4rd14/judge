@@ -1,8 +1,10 @@
 package replier
 
 import (
+	"context"
 	"fmt"
 	"log"
+	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
 )
@@ -45,4 +47,23 @@ func (conn *RabbitMQConnection) NewChannel() (*RabbitChannel, error) {
 	return &RabbitChannel{
 		ch,
 	}, err
+}
+
+func connectToRabbitMQ(ctx context.Context) (*RabbitMQConnection, error) {
+	var conn *RabbitMQConnection
+	err := retry(ctx, func() error {
+		var err error
+		conn, err = NewRabbitMQConnection()
+		return err
+	}, 3, time.Second*5)
+	return conn, err
+}
+
+func publishMessage(ch *RabbitChannel, ctx context.Context, resultJson []byte, queueName string) error {
+	return retry(ctx, func() error {
+		return ch.PublishWithContext(ctx, "", queueName, false, false, amqp.Publishing{
+			ContentType: "application/json",
+			Body:        resultJson,
+		})
+	}, 3, time.Second*5)
 }

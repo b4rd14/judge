@@ -3,28 +3,47 @@ package replier
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/docker/docker/client"
 	"github.com/minio/minio-go/v7"
 	amqp "github.com/rabbitmq/amqp091-go"
 	"github.com/redis/go-redis/v9"
 	"log"
+	"time"
 )
 
 func RecoverFromPanic() {
 	if r := recover(); r != nil {
-		fmt.Println("Recovered:", r)
+		log.Printf("Recovered from panic: %v", r)
 	}
 }
 
-func Judge(cli *client.Client, submission SubmissionMessage) map[string]string {
+func retry(ctx context.Context, fn func() error, maxAttempts int, interval time.Duration) error {
+	for attempt := 1; attempt <= maxAttempts; attempt++ {
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		default:
+			if err := fn(); err == nil {
+				return nil
+			} else {
+				log.Printf("Attempt %d failed: %s\n", attempt, err)
+				time.Sleep(interval)
+			}
+		}
+	}
+	return fmt.Errorf("exceeded maximum number of attempts")
+}
+
+func Judge(cli *client.Client, rds *redis.Client, submission SubmissionMessage) map[string]string {
 	defer RecoverFromPanic()
 	outputs, resp, err := submission.Run(cli)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to marshal output\n", err)
 	}
 	result := outputs.CheckTestCases(cli, resp.ID, submission)
-	_, err = SendResult(result, submission)
+	_, err = SendResult(rds, result, submission)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to send result\n", err)
 	}
@@ -32,20 +51,15 @@ func Judge(cli *client.Client, submission SubmissionMessage) map[string]string {
 	return result
 }
 
-func SendResult(res map[string]string, submission SubmissionMessage) (map[string]interface{}, error) {
-	defer RecoverFromPanic()
+func SendResult(rds *redis.Client, res map[string]string, submission SubmissionMessage) (map[string]interface{}, error) {
 	result := make(map[string]interface{})
 	result["submission_id"] = submission.SubmissionID
 	result["problem_id"] = submission.ProblemID
 	result["user_id"] = submission.UserID
 	result["results"] = &res
 
-	env := NewEnv()
-	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s", env.RabbitmqUsername, env.RabbitmqPassword, env.RabbitmqUrl))
-	if err != nil {
-		return nil, err
-	}
-	ch, err := conn.Channel()
+	conn, err := NewRabbitMQConnection()
+	ch, err := conn.NewChannel()
 	if err != nil {
 		return nil, err
 	}
@@ -54,13 +68,15 @@ func SendResult(res map[string]string, submission SubmissionMessage) (map[string
 	if err != nil {
 		return nil, err
 	}
-	err = ch.PublishWithContext(ctx, "", "results", false, false, amqp.Publishing{
-		ContentType: "application/json",
-		Body:        resultJson,
-	})
-
+	err = publishMessage(ch, ctx, resultJson, "results")
 	if err != nil {
-		return nil, err
+		if errors.Is(err, errors.New("exceeded maximum number of attempts")) {
+			err := setResult(ctx, rds, resultJson, submission)
+			if err != nil {
+				return nil, err
+			}
+			panic("Failed to send result to RabbitMQ, saved to Redis instead")
+		}
 	}
 	return result, nil
 }
@@ -84,15 +100,16 @@ func Result(ctx context.Context, msg amqp.Delivery, minioClient *minio.Client, c
 			return nil, err
 		}
 	}
-	err = Download(context.Background(), minioClient, "submissions", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, "Submissions")
+	err = retry(ctx, func() error {
+		return Download(ctx, minioClient, "submissions", submission.ProblemID+"/"+submission.UserID+"/"+submission.TimeStamp, "Submissions")
+	}, 3, time.Second*5)
 	if err != nil {
-		log.Printf("%s: %s", "Failed to download submission\n", err)
-		return nil, err
+		panic("Failed to download submission")
 	}
 
 	outChan := make(chan map[string]string)
 	go func() {
-		outChan <- Judge(cli, submission)
+		outChan <- Judge(cli, rds, submission)
 	}()
 	select {
 	case <-ctx.Done():

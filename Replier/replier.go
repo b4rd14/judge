@@ -7,6 +7,7 @@ import (
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
+	"github.com/redis/go-redis/v9"
 	"io"
 	"log"
 	"time"
@@ -15,19 +16,35 @@ import (
 type SubmissionMessage Type.SubmissionMessage
 type JudgeOutput map[string]string
 
+func Init(rds *redis.Client, ch *RabbitChannel, ctx context.Context) {
+
+	cached, err := getAllWithPrefix(context.Background(), rds, "result")
+	if err != nil {
+		return
+	}
+	for _, key := range cached {
+		err := publishMessage(ch, ctx, []byte(key), "results")
+		if err != nil {
+			return
+		}
+		err = delResult(ctx, rds, SubmissionMessage{SubmissionID: key[6:]})
+	}
+}
+
 func Reply() {
 	defer RecoverFromPanic()
 	rds := NewRedisClient()
-	err := rds.Ping(context.Background()).Err()
+	err := connectToRedis(context.Background(), rds)
 	if err != nil {
-		fmt.Println("redis")
+		fmt.Println("cant connect to redis")
 		return
 	}
-	conn, err := NewRabbitMQConnection()
+	conn, err := connectToRabbitMQ(context.Background())
 	ch, err := conn.NewChannel()
 	if err != nil {
 		return
 	}
+	Init(rds, ch, context.Background())
 	msgs, err := ch.ReadQueue("submit")
 	ch.AddQueue("results")
 
