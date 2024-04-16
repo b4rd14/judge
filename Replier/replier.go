@@ -16,19 +16,20 @@ import (
 type SubmissionMessage Type.SubmissionMessage
 type JudgeOutput map[string]string
 
-func Init(rds *redis.Client, ch *RabbitChannel, ctx context.Context) {
+func Init(rds *redis.Client, ch *RabbitChannel, ctx context.Context) error {
 
 	cached, err := getAllWithPrefix(context.Background(), rds, "result")
 	if err != nil {
-		return
+		return err
 	}
 	for _, key := range cached {
 		err := publishMessage(ch, ctx, []byte(key), "results")
 		if err != nil {
-			return
+			return err
 		}
 		err = delResult(ctx, rds, SubmissionMessage{SubmissionID: key[6:]})
 	}
+	return nil
 }
 
 func Reply() {
@@ -44,7 +45,10 @@ func Reply() {
 	if err != nil {
 		return
 	}
-	Init(rds, ch, context.Background())
+	err = Init(rds, ch, context.Background())
+	if err != nil {
+		return
+	}
 	msgs, err := ch.ReadQueue("submit")
 	ch.AddQueue("results")
 
