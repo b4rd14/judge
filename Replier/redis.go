@@ -8,9 +8,10 @@ import (
 )
 
 func NewRedisClient() *redis.Client {
+	env := NewEnv()
 	return redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
-		Password: "",
+		Addr:     env.RedisUrl,
+		Password: env.RedisPassword,
 		DB:       0})
 }
 

@@ -80,11 +80,13 @@ func CompareOutputs(output1 string, output2 string) string {
 	out1Bytes, err := io.ReadAll(out1)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to read from file", err)
+		return "error"
 	}
 
 	out2Bytes, err := io.ReadAll(out2)
 	if err != nil {
 		log.Printf("%s: %s", "Failed to read from file", err)
+		return "error"
 	}
 
 	if strings.TrimSpace(string(out1Bytes)) == strings.TrimSpace(string(out2Bytes)) {

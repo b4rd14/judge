@@ -1,0 +1,3002 @@
+Traceback (most recent call last):
+  File "/home/1713878938.py", line 12, in <module>
+    result = ELMOS(input_num)
+             ^^^^^^^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 9, in ELMOS
+    return ELMOS(n-1) ** 2
+           ^^^^^^^^^^
+  File "/home/1713878938.py", line 7, in ELMOS
+    return ELMOS(n-1) - 21
+           ^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded

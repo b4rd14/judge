@@ -47,7 +47,7 @@ func Judge(cli *client.Client, rds *redis.Client, submission SubmissionMessage) 
 	if err != nil {
 		log.Printf("%s: %s", "Failed to send result\n", err)
 	}
-	RemoveDir("Submissions/" + submission.ProblemID + "/")
+	//RemoveDir("Submissions/" + submission.ProblemID + "/")
 	return result
 }
 
@@ -89,13 +89,14 @@ func Result(ctx context.Context, msg amqp.Delivery, minioClient *minio.Client, c
 		log.Printf("%s: %s", "Failed to unmarshal message\n", err)
 		return nil, err
 	}
-	if _, err := getProblem(context.Background(), rds, submission.ProblemID); err != nil {
-		err = Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
+	if _, err := getProblem(ctx, rds, submission.ProblemID); err != nil {
+		err = retry(ctx, func() error {
+			return Download(context.Background(), minioClient, "problems", "problem"+submission.ProblemID, "Problems")
+		}, 3, time.Second*5)
 		if err != nil {
-			log.Printf("%s: %s", "Failed to download problem\n", err)
-			return nil, err
+			panic("Failed to download submission")
 		}
-		err := setProblem(ctx, rds, submission.ProblemID)
+		err = setProblem(ctx, rds, submission.ProblemID)
 		if err != nil {
 			return nil, err
 		}

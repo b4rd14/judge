@@ -7,4 +7,6 @@ type ENV struct {
 	RabbitmqUsername string `mapstructure:"RABBITMQ_USERNAME"`
 	RabbitmqPassword string `mapstructure:"RABBITMQ_PASSWORD"`
 	RabbitmqUrl      string `mapstructure:"RABBITMQ_URL"`
+	RedisUrl         string `mapstructure:"REDIS_URL"`
+	RedisPassword    string `mapstructure:"REDIS_PASSWORD"`
 }
